@@ -1,0 +1,29 @@
+server:                  #配置server
+  tomcat:       #springboot乱码解决
+    uri-encoding: UTF-8
+  servlet:
+    #context-path: /ssm
+    encoding:
+      force: true
+      charset: utf-8
+      enabled: true
+  port: 8089
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB #文件最大上传大小
+      max-request-size: 30MB #文件一次最大上传大小
+  datasource: #mysql数据库连接配置
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ms_blog?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: root
+    initialization-mode: always
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+
+logging:
+  config: classpath:logback/logback-spring.xml

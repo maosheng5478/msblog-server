@@ -16,8 +16,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 class MsblogServerApplicationTests {
 
-    @Autowired
-    private UserService userService;
 
     @Test
     public void userUpdate(){
@@ -26,7 +24,6 @@ class MsblogServerApplicationTests {
         user.setUsername("1456461");
         user.setPwd("131");
         user.setEmail("123@qq.com");
-        userService.updateUser(user);
 
         System.out.println( ResultFactory.buildSuccessResult("userService.findAll()"));
     }

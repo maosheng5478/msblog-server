@@ -1,4 +1,4 @@
-package com.ms.msblogserver.result;
+package com.ms.blogserver.result;
 
 public class ResultFactory {
     public static Result buildSuccessResult(Object data) {

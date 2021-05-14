@@ -1,4 +1,4 @@
-package com.ms.blogserver.config;
+package com.ms.blogserver.config.mybatis.plus;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;

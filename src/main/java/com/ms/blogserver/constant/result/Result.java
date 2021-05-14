@@ -1,4 +1,4 @@
-package com.ms.blogserver.result;
+package com.ms.blogserver.constant.result;
 
 import lombok.Data;
 import lombok.ToString;

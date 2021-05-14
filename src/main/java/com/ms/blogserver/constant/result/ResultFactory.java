@@ -1,4 +1,4 @@
-package com.ms.blogserver.result;
+package com.ms.blogserver.constant.result;
 
 public class ResultFactory {
     public static Result buildSuccessResult(Object data) {
@@ -11,6 +11,9 @@ public class ResultFactory {
 
     public static Result buildResult(ResultCode resultCode, String message, Object data) {
         return buildResult(resultCode.CODE, message, data);
+    }
+    public static Result buildResult(ResultCode resultCode, String message){
+        return buildResult(resultCode,message,null);
     }
 
     public static Result buildResult(int resultCode, String message, Object data) {

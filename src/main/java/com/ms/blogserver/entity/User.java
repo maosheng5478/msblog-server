@@ -16,7 +16,8 @@ public class User {
     private Long id ;
     private String username;
     private String pwd;
-    private int phone;
+
+    private Integer phone;
     private String email;
     @TableField(value = "create_time",fill = FieldFill.INSERT)
     private LocalDateTime createTime;
@@ -25,7 +26,7 @@ public class User {
     @Version
     @TableField(fill = FieldFill.INSERT)
     private int version;
-    @TableField(fill = FieldFill.INSERT)
+    @TableLogic
     private int deleted;
 
     public User() {
@@ -36,7 +37,7 @@ public class User {
         this.pwd = pwd;
     }
 
-    public User(long id, String username, String pwd, int phone, String email, LocalDateTime  create_time, LocalDateTime  update_time, int version, int deleted) {
+    public User(long id, String username, String pwd, Integer phone, String email, LocalDateTime  create_time, LocalDateTime  update_time, int version, int deleted) {
         this.id = id;
         this.username = username;
         this.pwd = pwd;

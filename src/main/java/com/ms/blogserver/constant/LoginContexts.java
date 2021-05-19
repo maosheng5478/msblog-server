@@ -10,7 +10,7 @@ import com.ms.blogserver.aspect.annotation.PermissionCheck;
 public interface LoginContexts {
 
     String INPUT_USER_NAME = "请输入用户名";
-    @PermissionCheck
+
     String INPUT_PASSWORD = "请输入密码";
 
     String USER_IS_NOT_EXIST = "用户不存在";

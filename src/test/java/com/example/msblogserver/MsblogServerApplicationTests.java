@@ -20,7 +20,7 @@ class MsblogServerApplicationTests {
         user.setPwd("131");
         user.setEmail("123@qq.com");
 
-        System.out.println( ResultFactory.buildSuccessResult("userService.findAll()"));
+
     }
 
 }

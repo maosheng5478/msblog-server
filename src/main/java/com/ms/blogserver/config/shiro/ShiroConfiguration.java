@@ -1,5 +1,6 @@
 package com.ms.blogserver.config.shiro;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -8,6 +9,7 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -32,6 +34,7 @@ public class ShiroConfiguration {
     public static LifecycleBeanPostProcessor getLifecycleBeanProcessor() {
         return new LifecycleBeanPostProcessor();
     }
+
     @Bean
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
@@ -45,11 +48,10 @@ public class ShiroConfiguration {
 
         filterChainDefinitionMap.put("/api/menu", "authc");
         //filterChainDefinitionMap.put("/api/admin/**", "authc");
-
         //filterChainDefinitionMap.put("/api/admin/**", "url");  // 自定义过滤器设置 3，设置过滤路径
-
         shiroFilterFactoryBean.setFilters(customizedFilter); // 自定义过滤器设置 4，启用
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+
         return shiroFilterFactoryBean;
     }
     @Bean
@@ -64,6 +66,7 @@ public class ShiroConfiguration {
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(getWJRealm());
+        securityManager.setSessionManager(getDefaultWebSessionManager());
         return securityManager;
     }
     @Bean
@@ -89,7 +92,22 @@ public class ShiroConfiguration {
     @Bean
     public SimpleCookie rememberMeCookie() {
         SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
-        simpleCookie.setMaxAge(259200);
+        simpleCookie.setMaxAge(3*24*60*60);//259200
         return simpleCookie;
     }
+
+    /**
+     * 设置session周期
+     *
+     * @return
+     */
+    @Bean
+    public DefaultWebSessionManager getDefaultWebSessionManager() {
+        DefaultWebSessionManager defaultWebSessionManager = new DefaultWebSessionManager();
+        defaultWebSessionManager.setGlobalSessionTimeout(1000 * 60 * 60);// 会话过期时间，单位：毫秒(在无操作时开始计时)
+        defaultWebSessionManager.setSessionValidationSchedulerEnabled(true);
+        defaultWebSessionManager.setSessionIdCookieEnabled(true);
+        return defaultWebSessionManager;
+    }
+
 }

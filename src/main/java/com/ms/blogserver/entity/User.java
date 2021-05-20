@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @ToString
@@ -16,7 +15,6 @@ public class User {
     private Long id ;
     private String username;
     private String pwd;
-
     private Integer phone;
     private String email;
     @TableField(value = "create_time",fill = FieldFill.INSERT)
@@ -48,4 +46,5 @@ public class User {
         this.version = version;
         this.deleted = deleted;
     }
+
 }

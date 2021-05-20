@@ -1,6 +1,8 @@
 package com.ms.blogserver.controller;
 
 import com.ms.blogserver.constant.LoginContexts;
+import com.ms.blogserver.constant.result.ResultCode;
+import com.ms.blogserver.constant.result.ResultString;
 import com.ms.blogserver.entity.User;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
@@ -26,9 +28,6 @@ public class UserConntroller {
 
     @PostMapping(value = "/login")
     public Result userLogin(String username, String pwd){
-        //User  user = userService.getUser(username,pwd);
-        //log.debug(user.toString());
-        //return ResultFactory.buildSuccessResult(user);
         if (username == null){
             return ResultFactory.buildFailResult(LoginContexts.INPUT_USER_NAME);
         }
@@ -66,7 +65,7 @@ public class UserConntroller {
         user.setEmail("123@qq.com");
 
         userService.updateUser(user);
-
+        System.out.println();
         return ResultFactory.buildSuccessResult(userService.findAll());
     }
     @PostMapping(value = "/remove")
@@ -93,4 +92,16 @@ public class UserConntroller {
         }
         return ResultFactory.buildSuccessResult(LoginContexts.NO_LOGIN_USER);
     }
+
+
+    @GetMapping(value = "api/authentication")
+    public Result authentication(){
+        Subject subject = SecurityUtils.getSubject();
+        /*if (subject.isAuthenticated()) {
+            return ResultFactory.buildSuccessResult(LoginContexts.LOGOUT_SUCCESS);
+        }
+        return ResultFactory.buildSuccessResult(LoginContexts.NO_LOGIN_USER);*/
+        return subject.isAuthenticated() ? ResultFactory.buildSuccessResult("") : ResultFactory.buildResult(ResultCode.UNAUTHORIZED,LoginContexts.NO_LOGIN_USER);
+    }
+
 }

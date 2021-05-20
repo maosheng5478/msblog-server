@@ -21,5 +21,5 @@ public interface LoginContexts {
 
     String LOGOUT_SUCCESS = "成功登出";
 
-    String NO_LOGIN_USER = "没有已登录用户";
+    String NO_LOGIN_USER = "用户未登录";
 }

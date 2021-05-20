@@ -35,6 +35,12 @@ public class ShiroConfiguration {
         return new LifecycleBeanPostProcessor();
     }
 
+    /**
+     * 过滤器
+     *
+     * @param securityManager
+     * @return
+     */
     @Bean
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.swing.border.TitledBorder;
+import java.io.Serializable;
 import java.time.LocalTime;
 
 /**
@@ -15,7 +16,7 @@ import java.time.LocalTime;
  */
 @Data
 @ToString
-public class Article {
+public class Article implements Serializable {
     private Integer id;
     private String title;
     @TableField(value = "create_time",fill = FieldFill.INSERT)

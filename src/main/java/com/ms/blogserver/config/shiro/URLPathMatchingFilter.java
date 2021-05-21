@@ -29,7 +29,7 @@ public class URLPathMatchingFilter extends PathMatchingFilter {
             return true;
         }
         String requestAPI = getPathWithinApplication(request);
-
+        System.out.println("访问接口：" + requestAPI);
         Subject subject = SecurityUtils.getSubject();
 
         if (!subject.isAuthenticated()) {

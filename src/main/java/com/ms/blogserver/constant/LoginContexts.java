@@ -22,4 +22,8 @@ public interface LoginContexts {
     String LOGOUT_SUCCESS = "成功登出";
 
     String NO_LOGIN_USER = "用户未登录";
+
+    String NAME_HAS_EXIST = "用户名已存在";
+
+    String REGISTER_SUCCESS = "注册成功";
 }

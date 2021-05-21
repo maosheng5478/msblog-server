@@ -16,6 +16,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.HtmlUtils;
 
 import java.util.List;
 
@@ -26,20 +27,21 @@ public class UserConntroller {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "/login")
+    @RequestMapping(value = "/login")
     public Result userLogin(String username, String pwd){
-        if (username == null){
+       /* if (username == null){
             return ResultFactory.buildFailResult(LoginContexts.INPUT_USER_NAME);
         }
         if(pwd == null){
             return ResultFactory.buildFailResult(LoginContexts.INPUT_PASSWORD);
-        }
+        }*/
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, pwd);
         usernamePasswordToken.setRememberMe(true);
         try {
             subject.login(usernamePasswordToken);
-            return ResultFactory.buildSuccessResult(username);
+            System.out.println(usernamePasswordToken.getCredentials());
+            return ResultFactory.buildSuccessResult(usernamePasswordToken.getCredentials());
         }catch (IncorrectCredentialsException e) {
             return ResultFactory.buildFailResult(LoginContexts.PASSWORD_IS_ERROR);
         } catch (UnknownAccountException e) {
@@ -51,14 +53,20 @@ public class UserConntroller {
     }
 
     @PostMapping(value = "/add")
-    public Result userAdd(User user){
+    public Result userAdd(@RequestBody User user){
+        String username = user.getUsername();
+        username = HtmlUtils.htmlEscape(username);
+        user.setUsername(username);
+        if (userService.hasUserName(username)){
+            return ResultFactory.buildFailResult(LoginContexts.NAME_HAS_EXIST);
+        }
         userService.insertUser(user);
-        List<User> userList = userService.findAll();
-        return ResultFactory.buildSuccessResult(userList);
+        //List<User> userList = userService.findAll();
+        return ResultFactory.buildSuccessResult(LoginContexts.REGISTER_SUCCESS);
     }
 
     @PostMapping(value = "/update")
-    public Result userUpdate(){
+    public Result userUpdate(@RequestBody User u){
         User user = userService.getUserByID(1392754664565116930L);
         user.setUsername("11131");
         user.setPwd("131");

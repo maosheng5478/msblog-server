@@ -17,6 +17,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
 
 
     @Override
+    public boolean hasUserName(String username) {
+        return findByUserName(username) == null;
+    }
+
+    @Override
     public User getUser(String username, String pwd) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.eq("username",username);

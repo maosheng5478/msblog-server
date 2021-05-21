@@ -7,6 +7,13 @@ import java.util.List;
 
 public interface UserService extends IService<User> {
     /**
+     * 判断用户名是否存在
+     *
+     * @param username
+     * @return
+     */
+    boolean hasUserName(String username);
+    /**
      *根据用户名和密码查询
      *
      * @param username

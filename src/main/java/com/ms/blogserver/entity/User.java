@@ -4,12 +4,13 @@ import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 @ToString
 @TableName(value = "ms_user")
-public class User {
+public class User implements Serializable {
 
     @TableId(type = IdType.ID_WORKER)
     private Long id ;
@@ -26,6 +27,8 @@ public class User {
     private int version;
     @TableLogic
     private int deleted;
+    @TableField(value = "role_id",fill = FieldFill.INSERT)
+    private int roleId;
 
     public User() {
     }
@@ -35,16 +38,11 @@ public class User {
         this.pwd = pwd;
     }
 
-    public User(long id, String username, String pwd, Integer phone, String email, LocalDateTime  create_time, LocalDateTime  update_time, int version, int deleted) {
-        this.id = id;
+    public User(String username, String pwd, Integer phone, String email, int roleId) {
         this.username = username;
         this.pwd = pwd;
         this.phone = phone;
         this.email = email;
-        this.createTime = create_time;
-        this.updateTime = update_time;
-        this.version = version;
-        this.deleted = deleted;
+        this.roleId = roleId;
     }
-
 }

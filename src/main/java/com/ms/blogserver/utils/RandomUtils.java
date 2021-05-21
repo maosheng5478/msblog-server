@@ -1,4 +1,4 @@
-package utils;
+package com.ms.blogserver.utils;
 
 import java.util.Random;
 

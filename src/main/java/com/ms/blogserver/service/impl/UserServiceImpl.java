@@ -1,13 +1,11 @@
 package com.ms.blogserver.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ms.blogserver.constant.EncryptPassword;
+import com.ms.blogserver.utils.EncryptPassword;
 import com.ms.blogserver.entity.User;
 import com.ms.blogserver.mapper.UserMapper;
 import com.ms.blogserver.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -71,5 +69,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.eq("username",userName);
         return baseMapper.selectOne(wrapper);
+    }
+
+    @Override
+    public String getPassword(String username) {
+        return findByUserName(username).getPwd();
     }
 }

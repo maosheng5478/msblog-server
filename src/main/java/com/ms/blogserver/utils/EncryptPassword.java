@@ -1,4 +1,4 @@
-package com.ms.blogserver.constant;
+package com.ms.blogserver.utils;
 
 import org.apache.shiro.crypto.hash.SimpleHash;
 

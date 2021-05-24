@@ -1,5 +1,6 @@
 package com.ms.blogserver.controller;
 
+import com.ms.blogserver.constant.exception.UnauthorizedException;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.service.AdminMenuService;

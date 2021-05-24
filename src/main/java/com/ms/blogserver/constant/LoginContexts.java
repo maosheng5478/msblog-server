@@ -26,4 +26,6 @@ public interface LoginContexts {
     String NAME_HAS_EXIST = "用户名已存在";
 
     String REGISTER_SUCCESS = "注册成功";
+
+    String TOKEN_ERROR = "token验证失败";
 }

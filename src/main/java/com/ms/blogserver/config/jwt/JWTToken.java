@@ -5,25 +5,22 @@ import org.apache.shiro.authc.AuthenticationToken;
 /**
  * @description:
  * @author: zhh
- * @time: 2021/5/21
+ * @time: 2021/5/24
  */
 public class JWTToken implements AuthenticationToken {
-
-    // 密钥
     private String token;
 
     public JWTToken(String token) {
         this.token = token;
     }
 
-
     @Override
     public Object getPrincipal() {
-        return null;
+        return token;
     }
 
     @Override
     public Object getCredentials() {
-        return null;
+        return token;
     }
 }

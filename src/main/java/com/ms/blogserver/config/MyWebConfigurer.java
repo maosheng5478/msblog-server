@@ -25,4 +25,5 @@ public class MyWebConfigurer implements WebMvcConfigurer {
                 .allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
                 .allowedHeaders("*");
     }
+
 }

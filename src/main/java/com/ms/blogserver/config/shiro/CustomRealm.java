@@ -2,7 +2,10 @@ package com.ms.blogserver.config.shiro;
 
 import com.ms.blogserver.config.jwt.JWTToken;
 import com.ms.blogserver.config.jwt.JWTUtil;
+import com.ms.blogserver.entity.User;
 import com.ms.blogserver.service.UserService;
+import com.ms.blogserver.utils.TokenUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -23,6 +26,7 @@ import java.util.Set;
  */
 
 @Component
+@Slf4j
 public class CustomRealm extends AuthorizingRealm {
 
 
@@ -42,22 +46,16 @@ public class CustomRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        System.out.println("————身份认证方法————");
-        String token = (String) authenticationToken.getCredentials();
-        // 解密获得username，用于和数据库进行对比
-        String username = JWTUtil.getUsername(token);
-        if (username == null || !JWTUtil.verify(token, username)) {
-            throw new AuthenticationException("token认证失败！");
+        log.info("身份认证");
+        String token= (String) authenticationToken.getCredentials();
+        String username= TokenUtil.getAccount(token);
+        //这里要去数据库查找是否存在该用户，这里直接放行
+        User user = userService.findByUserName(username);
+        if (user==null){
+            throw new AuthenticationException("认证失败,用户不存在");
         }
+        return new SimpleAuthenticationInfo(token,token,"MyRealm");
 
-        /* 以下数据库查询可根据实际情况，可以不必再次查询，这里我两次查询会很耗资源
-         * 我这里增加两次查询是因为考虑到数据库管理员可能自行更改数据库中的用户信息
-         */
-        String password = userService.getPassword(username);
-        if (password == null) {
-            throw new AuthenticationException("该用户不存在！");
-        }
-        return new SimpleAuthenticationInfo(token, token, "MyRealm");
     }
 
     /**

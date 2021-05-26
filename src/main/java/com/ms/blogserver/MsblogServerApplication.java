@@ -12,7 +12,7 @@ public class MsblogServerApplication {
         try{
             SpringApplication.run(MsblogServerApplication.class, args);
         }catch(Exception e){
-            //e.printStackTrace();
+            e.printStackTrace();
         }
 
     }

@@ -12,6 +12,7 @@ import org.apache.shiro.authz.AuthorizationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 /**
  * @description:
@@ -43,6 +44,15 @@ public class DefaultExceptionHandler {
         return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.DATA);
     }
 
+    /**
+     * 捕捉404异常
+     */
+   /* @ExceptionHandler(NoHandlerFoundException.class)
+    public Result handle(NoHandlerFoundException e) {
+        e.printStackTrace();
+        return ResultFactory.buildResult(ResultCode.NOT_FOUND,ResultString.PAGE_NO_FOUND.DATA);
+    }
+*/
     /**
      * 其他异常
      * @param e

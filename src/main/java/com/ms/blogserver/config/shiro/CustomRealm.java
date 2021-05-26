@@ -1,7 +1,7 @@
 package com.ms.blogserver.config.shiro;
 
 import com.ms.blogserver.config.jwt.JWTToken;
-import com.ms.blogserver.config.jwt.JWTUtil;
+
 import com.ms.blogserver.entity.User;
 import com.ms.blogserver.service.UserService;
 import com.ms.blogserver.utils.TokenUtil;
@@ -16,8 +16,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @description:

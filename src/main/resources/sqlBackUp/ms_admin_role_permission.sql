@@ -1,0 +1,13 @@
+INSERT INTO `ms_admin_role_permission` (`id`, `rid`, `mid`) VALUES (194, 1, 2);
+INSERT INTO `ms_admin_role_permission` (`id`, `rid`, `mid`) VALUES (195, 1, 1);
+INSERT INTO `ms_admin_role_permission` (`id`, `rid`, `mid`) VALUES (196, 1, 3);
+INSERT INTO `ms_admin_role_permission` (`id`, `rid`, `mid`) VALUES (197, 1, 4);
+INSERT INTO `ms_admin_role_permission` (`id`, `rid`, `mid`) VALUES (198, 1, 5);
+INSERT INTO `ms_admin_role_permission` (`id`, `rid`, `mid`) VALUES (199, 1, 6);
+INSERT INTO `ms_admin_role_permission` (`id`, `rid`, `mid`) VALUES (200, 1, 7);
+INSERT INTO `ms_admin_role_permission` (`id`, `rid`, `mid`) VALUES (201, 1, 8);
+INSERT INTO `ms_admin_role_permission` (`id`, `rid`, `mid`) VALUES (202, 1, 9);
+INSERT INTO `ms_admin_role_permission` (`id`, `rid`, `mid`) VALUES (203, 1, 10);
+INSERT INTO `ms_admin_role_permission` (`id`, `rid`, `mid`) VALUES (204, 3, 4);
+INSERT INTO `ms_admin_role_permission` (`id`, `rid`, `mid`) VALUES (205, 3, 5);
+INSERT INTO `ms_admin_role_permission` (`id`, `rid`, `mid`) VALUES (206, 3, 11);

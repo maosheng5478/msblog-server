@@ -47,12 +47,11 @@ public class DefaultExceptionHandler {
     /**
      * 捕捉404异常
      */
-   /* @ExceptionHandler(NoHandlerFoundException.class)
+    @ExceptionHandler(NoHandlerFoundException.class)
     public Result handle(NoHandlerFoundException e) {
         e.printStackTrace();
         return ResultFactory.buildResult(ResultCode.NOT_FOUND,ResultString.PAGE_NO_FOUND.DATA);
     }
-*/
     /**
      * 其他异常
      * @param e

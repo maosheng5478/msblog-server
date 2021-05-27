@@ -1,11 +1,12 @@
 package com.ms.blogserver.controller;
 
-import com.ms.blogserver.constant.exception.UnauthorizedException;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
-import com.ms.blogserver.service.AdminMenuService;
+import com.ms.blogserver.service.MenuService;
+import com.ms.blogserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,17 +20,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserInfoController {
 
     @Autowired
-    private AdminMenuService adminMenuService;
+    private MenuService menuService;
 
-    @GetMapping(value = "/menu")
+    @Autowired
+    private UserService userService;
+
+    @PostMapping(value = "/menu")
     public Result getMenu(){
-
         return ResultFactory.buildSuccessResult("");
     }
-    @GetMapping(value = "/m")
-    public Result getMdenu(){
-
-        return ResultFactory.buildSuccessResult("");
+    @PostMapping(value = "/user/page")
+    public Result getByPage(){
+        return ResultFactory.buildSuccessResult(userService.getPage());
     }
+
 
 }

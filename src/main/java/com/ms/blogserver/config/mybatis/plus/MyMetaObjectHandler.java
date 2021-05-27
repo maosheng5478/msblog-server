@@ -13,7 +13,6 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         this.strictInsertFill(metaObject, "createTime", LocalDateTime.class, LocalDateTime.now());
         this.strictUpdateFill(metaObject, "updateTime", LocalDateTime.class, LocalDateTime.now());
         this.strictInsertFill(metaObject,"version",Integer.class,0);
-        this.strictInsertFill(metaObject,"roleId",Integer.class,3);
 
 
         //this.setFieldValByName("createTime",new Date(),metaObject);

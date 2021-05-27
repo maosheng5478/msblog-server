@@ -1,0 +1,1 @@
+现在还有一种情况，应该是按了path from repository root,导致XML文件一致以file格式打开，可以在file-file properties-associate...中选择文件打开方式,然后就ok

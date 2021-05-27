@@ -1,7 +1,7 @@
 package com.ms.blogserver.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ms.blogserver.entity.AdminRolePermission;
+import com.ms.blogserver.entity.Menu;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -10,5 +10,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @time: 2021/5/21
  */
 @Mapper
-public interface AdminRolePermissionMapper extends BaseMapper<AdminRolePermission> {
+public interface MenuMapper extends BaseMapper<Menu> {
+
 }

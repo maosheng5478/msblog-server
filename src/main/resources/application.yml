@@ -19,9 +19,6 @@ spring:
     username: root
     password: root
     initialization-mode: always
-  jpa:
-    hibernate:
-      ddl-auto: none
   redis:
     # Redis服务器地址
     host: localhost

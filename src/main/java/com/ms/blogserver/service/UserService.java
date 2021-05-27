@@ -1,7 +1,9 @@
 package com.ms.blogserver.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ms.blogserver.entity.User;
+import com.ms.blogserver.entity.vo.PageVO;
 
 import java.util.List;
 
@@ -13,14 +15,6 @@ public interface UserService extends IService<User> {
      * @return
      */
     boolean hasUserName(String username);
-    /**
-     *根据用户名和密码查询
-     *
-     * @param username
-     * @param pwd
-     * @return
-     */
-    User getUser(String username,String pwd);
 
     /**
      * 根据id查询用户
@@ -83,4 +77,10 @@ public interface UserService extends IService<User> {
      * @return
      */
     String getPassword(String username);
+
+    /**
+     * 分页查询
+     * @return
+     */
+    PageVO<User> getPage();
 }

@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.ToString;
 
+
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @description: 菜单实体类
@@ -13,8 +15,8 @@ import java.io.Serializable;
  */
 @Data
 @ToString
-@TableName(value = "ms_admin_menu")
-public class AdminMenu implements Serializable {
+@TableName(value = "ms_menu")
+public class Menu implements Serializable {
 
     private Integer id;
     private String path;
@@ -23,6 +25,8 @@ public class AdminMenu implements Serializable {
     private String component;
     private Integer parentId;
 
-    public AdminMenu() {
+    private List<Menu> children;
+
+    public Menu() {
     }
 }

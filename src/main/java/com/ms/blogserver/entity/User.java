@@ -27,8 +27,7 @@ public class User implements Serializable {
     private int version;
     @TableLogic
     private int deleted;
-    @TableField(value = "role_id",fill = FieldFill.INSERT)
-    private int roleId;
+
 
     public User() {
     }
@@ -38,11 +37,10 @@ public class User implements Serializable {
         this.pwd = pwd;
     }
 
-    public User(String username, String pwd, Integer phone, String email, int roleId) {
+    public User(String username, String pwd, Integer phone, String email) {
         this.username = username;
         this.pwd = pwd;
         this.phone = phone;
         this.email = email;
-        this.roleId = roleId;
     }
 }

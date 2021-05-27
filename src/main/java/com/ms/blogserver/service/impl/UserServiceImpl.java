@@ -1,7 +1,10 @@
 package com.ms.blogserver.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ms.blogserver.entity.vo.PageVO;
 import com.ms.blogserver.utils.EncryptPassword;
 import com.ms.blogserver.entity.User;
 import com.ms.blogserver.mapper.UserMapper;
@@ -20,14 +23,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
     }
 
     @Override
-    public User getUser(String username, String pwd) {
-        QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.eq("username",username);
-        wrapper.eq("pwd",EncryptPassword.encrypt(pwd));
-        return baseMapper.selectOne(wrapper);
-    }
-
-    @Override
     public User getUserByID(Long id) {
         return baseMapper.selectById(id);
     }
@@ -40,12 +35,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
 
     @Override
     public void updateUser(User user) {
-        /*UpdateWrapper<User> wrapper = new UpdateWrapper<>();
-        wrapper.eq("id",user.getId());
-        wrapper.set("username",user.getUsername());
-        wrapper.set("pwd",user.getPwd());
-        wrapper.set("phone",user.getPhone());
-        wrapper.set("email",user.getEmail());*/
         baseMapper.updateById(user);
     }
 
@@ -74,5 +63,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
     @Override
     public String getPassword(String username) {
         return findByUserName(username).getPwd();
+    }
+
+    @Override
+    public PageVO<User> getPage() {
+        IPage<User> iPage = new Page<>(1,5);
+        baseMapper.selectPage(iPage,null);
+        PageVO<User> pageVO = new PageVO<>(iPage.getCurrent(),iPage.getSize(),iPage.getTotal());
+        pageVO.setList(iPage.getRecords());
+        return pageVO;
     }
 }

@@ -13,13 +13,13 @@ import java.io.Serializable;
  */
 @Data
 @ToString
-@TableName(value = "me_admin_role")
-public class AdminRole implements Serializable {
-    private int id;
+@TableName(value = "me_role")
+public class Role implements Serializable {
+    private Long id;
     private String name;
     private String nameZh;
     private int enabled;
 
-    public AdminRole() {
+    public Role() {
     }
 }

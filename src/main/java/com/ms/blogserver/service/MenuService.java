@@ -1,7 +1,7 @@
 package com.ms.blogserver.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ms.blogserver.entity.AdminMenu;
+import com.ms.blogserver.entity.Menu;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import java.util.List;
  * @author: zhh
  * @time: 2021/5/21
  */
-public interface AdminMenuService extends IService<AdminMenu> {
+public interface MenuService extends IService<Menu> {
 
-    List<AdminMenu> getMenusByCurrentUser();
+    List<Menu> getMenusByCurrentUser();
 
 }

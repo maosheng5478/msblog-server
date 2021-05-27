@@ -1,7 +1,7 @@
 package com.ms.blogserver.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ms.blogserver.entity.AdminRole;
+import com.ms.blogserver.entity.Role;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -10,5 +10,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @time: 2021/5/21
  */
 @Mapper
-public interface AdminRoleMapper extends BaseMapper<AdminRole> {
+public interface RoleMapper extends BaseMapper<Role> {
 }

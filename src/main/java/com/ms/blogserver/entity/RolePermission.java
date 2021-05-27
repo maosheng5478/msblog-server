@@ -13,10 +13,12 @@ import java.io.Serializable;
  */
 @Data
 @ToString
-@TableName(value = "ms_admin_role_permission")
-public class AdminRolePermission implements Serializable {
-
-    private Integer id;
-    private Integer rid;
-    private Integer mid;
+@TableName(value = "ms_role_permission")
+public class RolePermission implements Serializable {
+    //主键id
+    private Long id;
+    //role id
+    private int rid;
+    //permission id
+    private int pid;
 }

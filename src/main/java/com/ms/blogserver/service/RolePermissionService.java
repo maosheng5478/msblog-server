@@ -1,7 +1,7 @@
 package com.ms.blogserver.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ms.blogserver.entity.AdminRolePermission;
+import com.ms.blogserver.entity.RolePermission;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * @author: zhh
  * @time: 2021/5/21
  */
-public interface AdminRolePermissionService extends IService<AdminRolePermission> {
+public interface RolePermissionService extends IService<RolePermission> {
 
     List<Integer> getAllMenuIdByRoleId(Integer roleId);
 }

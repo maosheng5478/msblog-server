@@ -26,6 +26,20 @@ public class TokenServiceImpl implements TokenService {
         redisUtil.set(username,currentTimeMillis,TokenUtil.REFRESH_EXPIRE_TIME);
         response.setHeader("Authorization", token);
         response.setHeader("Access-Control-Expose-Headers", "Authorization");
-        return null;
+        return token;
+    }
+
+    @Override
+    public boolean removeToken(String token) {
+        String account = TokenUtil.getAccount(token);
+        Long currentTime=TokenUtil.getCurrentTime(token);
+        if (redisUtil.hasKey(account)) {
+            Long currentTimeMillisRedis = (Long) redisUtil.get(account);
+            if (currentTimeMillisRedis.equals(currentTime)) {
+                redisUtil.del(account);
+                return true;
+            }
+        }
+        return false;
     }
 }

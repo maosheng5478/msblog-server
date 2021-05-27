@@ -4,7 +4,9 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
@@ -14,6 +16,7 @@ import java.util.Date;
  * @author: zhh
  * @time: 2021/5/25
  */
+@Slf4j
 public class TokenUtil {
     public static final long EXPIRE_TIME= 5*60*1000;//token到期时间5分钟，毫秒为单位
     public static final long REFRESH_EXPIRE_TIME=30*60;//RefreshToken到期时间为30分钟，秒为单位
@@ -64,7 +67,8 @@ public class TokenUtil {
             DecodedJWT decodedJWT=JWT.decode(token);
             return decodedJWT.getClaim("account").asString();
 
-        }catch (JWTCreationException e){
+        }catch (JWTDecodeException e){
+            log.error(e.getMessage());
             return null;
         }
     }

@@ -8,6 +8,7 @@ import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.service.TokenService;
 import com.ms.blogserver.service.UserService;
 import com.ms.blogserver.utils.EncryptPassword;
+import com.ms.blogserver.utils.TokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
@@ -27,14 +29,14 @@ public class UserController {
     @Autowired
     private TokenService tokenService;
 
-    @GetMapping(value = "api/authentication")
+    @PostMapping(value = "api/authentication")
     public Result authentication() throws Exception{
         Subject subject = SecurityUtils.getSubject();
         return subject.isAuthenticated() ? ResultFactory.buildSuccessResult("") :
                 ResultFactory.buildResult(ResultCode.UNAUTHORIZED,LoginContexts.NO_LOGIN_USER);
     }
 
-    @RequestMapping(value = "/login")
+    @PostMapping(value = "/login")
     public Result userLogin(String username, String pwd, HttpServletResponse response){
         if (username == null){
             return ResultFactory.buildFailResult(LoginContexts.INPUT_USER_NAME);
@@ -82,29 +84,20 @@ public class UserController {
         throw new Exception("There is no data with ID "+ "1392754664565116930L"+" in the database");
 
     }
+
+    @GetMapping(value = "/logout")
+    public Result logout(HttpServletRequest request) {
+        String token = request.getHeader("token");
+        return tokenService.removeToken(token) ?
+                ResultFactory.buildSuccessResult(LoginContexts.LOGOUT_SUCCESS) :
+                ResultFactory.buildFailResult(LoginContexts.NO_LOGIN_USER);
+    }
+
     @PostMapping(value = "/delete")
     public Result phyDelete(){
         userService.deleteById(1392754664565116930L);
         return ResultFactory.buildSuccessResult(userService.findAll());
     }
-
-    @GetMapping(value = "/logout")
-    public Result logout() throws Exception{
-        Subject subject = SecurityUtils.getSubject();
-        log.info(String.valueOf(subject.isAuthenticated()));
-        if (subject.isAuthenticated()) {
-            try {
-                subject.logout();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-
-            return ResultFactory.buildSuccessResult(LoginContexts.LOGOUT_SUCCESS);
-        }
-        return ResultFactory.buildFailResult(LoginContexts.NO_LOGIN_USER);
-    }
-
-
 
 
 }

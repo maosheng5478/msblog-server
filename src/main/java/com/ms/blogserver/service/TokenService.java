@@ -10,4 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 public interface TokenService {
 
     String CreateToken(String username, HttpServletResponse response);
+
+    boolean removeToken(String token);
 }

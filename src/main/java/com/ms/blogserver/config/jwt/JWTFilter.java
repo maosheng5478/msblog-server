@@ -2,8 +2,10 @@ package com.ms.blogserver.config.jwt;
 
 import com.alibaba.fastjson.JSONObject;
 import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.ms.blogserver.constant.LoginContexts;
 import com.ms.blogserver.constant.result.ResultCode;
 import com.ms.blogserver.constant.result.ResultFactory;
+import com.ms.blogserver.constant.result.ResultString;
 import com.ms.blogserver.utils.RedisUtil;
 import com.ms.blogserver.utils.TokenUtil;
 import org.apache.shiro.ShiroException;
@@ -135,7 +137,6 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
                 }
                 return false;
             }catch (Exception e){
-                Throwable throwable = e.getCause();
                 logger.error("token验证："+e.getClass());
                 if (e instanceof TokenExpiredException){
                     return refreshToken(request, response);
@@ -210,7 +211,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
             httpServletResponse.setCharacterEncoding("UTF-8");
             httpServletResponse.setContentType("application/json; charset=utf-8");
             PrintWriter out =  httpServletResponse.getWriter();
-            String data = JSONObject.toJSONString(ResultFactory.buildResult(ResultCode.UNAUTHORIZED, "无权访问(Unauthorized):",null));
+            String data = JSONObject.toJSONString(ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.DATA,LoginContexts.TOKEN_ERROR));
             out.append(data);
             System.out.println("responseError:"+message);
         } catch (IOException e) {

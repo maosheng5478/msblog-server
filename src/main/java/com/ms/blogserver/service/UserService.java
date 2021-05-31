@@ -1,8 +1,8 @@
 package com.ms.blogserver.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ms.blogserver.entity.User;
+import com.ms.blogserver.entity.dto.UserDTO;
 import com.ms.blogserver.entity.vo.PageVO;
 import com.ms.blogserver.entity.vo.UserVO;
 
@@ -35,9 +35,9 @@ public interface UserService extends IService<User> {
     /**
      * 修改用户（乐观锁）
      *
-     * @param user
+     * @param userDTO
      */
-    void updateUser(User user);
+    void updateUser(UserDTO userDTO);
 
     /**
      * 查询所有用户

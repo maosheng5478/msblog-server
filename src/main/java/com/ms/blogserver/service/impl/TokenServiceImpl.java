@@ -1,5 +1,8 @@
 package com.ms.blogserver.service.impl;
 
+import com.ms.blogserver.converter.vo.UserVOConverter;
+import com.ms.blogserver.entity.User;
+import com.ms.blogserver.entity.vo.UserVO;
 import com.ms.blogserver.service.TokenService;
 import com.ms.blogserver.utils.RedisUtil;
 import com.ms.blogserver.utils.TokenUtil;
@@ -47,5 +50,12 @@ public class TokenServiceImpl implements TokenService {
     public boolean hasLogin(String token) {
         String account = TokenUtil.getAccount(token);
         return redisUtil.hasKey(account);
+    }
+
+    @Override
+    public UserVO setToken(User user,String token) {
+        UserVO userVO = UserVOConverter.INSTANCE.toData(user);
+        userVO.setToken(token);
+        return userVO;
     }
 }

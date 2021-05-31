@@ -16,7 +16,7 @@ public class User implements Serializable {
     private Long id ;
     private String username;
     private String pwd;
-    private Integer phone;
+    private String phone;
     private String email;
     @TableField(value = "create_time",fill = FieldFill.INSERT)
     private LocalDateTime createTime;
@@ -37,7 +37,7 @@ public class User implements Serializable {
         this.pwd = pwd;
     }
 
-    public User(String username, String pwd, Integer phone, String email) {
+    public User(String username, String pwd, String phone, String email) {
         this.username = username;
         this.pwd = pwd;
         this.phone = phone;

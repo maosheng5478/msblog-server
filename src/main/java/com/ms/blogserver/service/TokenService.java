@@ -1,5 +1,8 @@
 package com.ms.blogserver.service;
 
+import com.ms.blogserver.entity.User;
+import com.ms.blogserver.entity.vo.UserVO;
+
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -14,4 +17,6 @@ public interface TokenService {
     boolean removeToken(String token);
 
     boolean hasLogin(String token);
+
+    UserVO setToken(User user, String token);
 }

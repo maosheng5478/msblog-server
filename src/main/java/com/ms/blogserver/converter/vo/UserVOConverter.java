@@ -1,6 +1,6 @@
-package com.ms.blogserver.converter;
+package com.ms.blogserver.converter.vo;
 
-import com.ms.blogserver.converter.core.Converter;
+import com.ms.blogserver.converter.Converter;
 import com.ms.blogserver.entity.User;
 import com.ms.blogserver.entity.vo.UserVO;
 import org.mapstruct.factory.Mappers;
@@ -13,9 +13,9 @@ import java.util.List;
  * @time: 2021/5/31
  */
 @org.mapstruct.Mapper
-public interface UserConverter extends Converter<User, UserVO> {
+public interface UserVOConverter extends Converter<User, UserVO> {
 
-    UserConverter INSTANCE = Mappers.getMapper(UserConverter.class);
+    UserVOConverter INSTANCE = Mappers.getMapper(UserVOConverter.class);
 
     @Override
     UserVO toData(User user);
@@ -23,5 +23,6 @@ public interface UserConverter extends Converter<User, UserVO> {
     @Override
     User fromData(UserVO userVO);
 
-    List<UserVO> toListData(List<User> userList);
+    @Override
+    List<UserVO> toDataList(List<User> userList);
 }

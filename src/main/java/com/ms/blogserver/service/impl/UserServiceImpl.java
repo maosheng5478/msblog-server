@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ms.blogserver.constant.LoginContexts;
 import com.ms.blogserver.constant.exception.CustomException;
-import com.ms.blogserver.converter.UserConverter;
+import com.ms.blogserver.converter.dto.UserDTOConverter;
+import com.ms.blogserver.converter.vo.UserVOConverter;
+import com.ms.blogserver.entity.dto.UserDTO;
 import com.ms.blogserver.entity.vo.PageVO;
 import com.ms.blogserver.entity.vo.UserVO;
 import com.ms.blogserver.utils.EncryptPassword;
@@ -18,7 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
 
     @Override
@@ -38,11 +40,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
     }
 
     @Override
-    public void updateUser(User user) {
-        if (user == null){
+    public void updateUser(UserDTO userDTO) {
+        if (userDTO == null || userDTO.getId() == 0) {
             throw new CustomException(LoginContexts.AUTHENTIC_FAIL);
-        }else if (user.getId() == null){
-            throw new CustomException(LoginContexts.ID_IS_NULL);
+        }
+
+        System.out.println(userDTO);
+        User user = getUserByID(userDTO.getId());
+        if (!userDTO.getUsername().isEmpty()) {
+            user.setUsername(userDTO.getUsername());
+        }
+        if (!userDTO.getEmail().isEmpty()) {
+            user.setEmail(userDTO.getEmail());
+        }
+        if (!userDTO.getPwd().isEmpty()) {
+            user.setPwd(EncryptPassword.encrypt(userDTO.getPwd()));
+        }
+        if (!userDTO.getPhone().isEmpty()) {
+            user.setPhone(userDTO.getPhone());
         }
         baseMapper.updateById(user);
     }
@@ -65,7 +80,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
     @Override
     public User findByUserName(String userName) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.eq("username",userName);
+        wrapper.eq("username", userName);
         return baseMapper.selectOne(wrapper);
     }
 
@@ -76,10 +91,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
 
     @Override
     public PageVO<UserVO> getPage() {
-        IPage<User> iPage = new Page<>(1,5);
-        baseMapper.selectPage(iPage,null);
-        List<UserVO> voList = UserConverter.INSTANCE.toListData(iPage.getRecords());
-        PageVO<UserVO> pageVO = new PageVO<>(iPage.getCurrent(),iPage.getSize(),iPage.getTotal());
+        IPage<User> iPage = new Page<>(1, 5);
+        baseMapper.selectPage(iPage, null);
+        List<UserVO> voList = UserVOConverter.INSTANCE.toDataList(iPage.getRecords());
+        PageVO<UserVO> pageVO = new PageVO<>(iPage.getCurrent(), iPage.getSize(), iPage.getTotal());
         pageVO.setList(voList);
         return pageVO;
     }

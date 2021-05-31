@@ -1,6 +1,7 @@
-package com.ms.blogserver.converter.core;
+package com.ms.blogserver.converter;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @description:
@@ -12,4 +13,8 @@ public interface Converter<T extends Serializable,R> {
     R toData(T t);
 
     T fromData(R r);
+
+    List<R> toDataList(List<T> tList);
+
+    List<T> fromDataList(List<R> rList);
 }

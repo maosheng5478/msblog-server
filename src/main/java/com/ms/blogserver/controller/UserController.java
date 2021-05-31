@@ -3,24 +3,22 @@ package com.ms.blogserver.controller;
 import com.ms.blogserver.constant.LoginContexts;
 import com.ms.blogserver.constant.exception.CustomException;
 import com.ms.blogserver.constant.result.ResultCode;
+import com.ms.blogserver.converter.dto.UserDTOConverter;
 import com.ms.blogserver.entity.User;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
+import com.ms.blogserver.entity.dto.UserDTO;
+import com.ms.blogserver.entity.vo.UserVO;
 import com.ms.blogserver.service.TokenService;
 import com.ms.blogserver.service.UserService;
 import com.ms.blogserver.utils.EncryptPassword;
-import com.ms.blogserver.utils.TokenUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @Slf4j
@@ -46,11 +44,9 @@ public class UserController {
         if (realPassword == null){
             return ResultFactory.buildFailResult(LoginContexts.USER_IS_NOT_EXIST);
         }else if (realPassword.equals(EncryptPassword.encrypt(pwd))){
-            Map<String,Object> map = new HashMap<>();
-            map.put("token",tokenService.CreateToken(username,response));
-            map.put("username",username);
-            map.put("id",userService.findByUserName(username).getId());
-            return ResultFactory.buildSuccessResult(map);
+            UserVO userVO = tokenService.setToken(userService.findByUserName(username),tokenService.CreateToken(username,response));
+            System.out.println("uservo:" + userVO);
+            return ResultFactory.buildSuccessResult(userVO);
         }
         return ResultFactory.buildFailResult(LoginContexts.PASSWORD_IS_ERROR);
     }
@@ -68,12 +64,12 @@ public class UserController {
     }
 
     @PostMapping(value = "/update")
-    public Result userUpdate(@RequestBody User u) throws CustomException {
+    public Result userUpdate(@RequestBody UserDTO u) throws CustomException {
         userService.updateUser(u);
         return ResultFactory.buildSuccessResult(userService.findAll());
     }
     @PostMapping(value = "/remove")
-    public Result userDelete(Long  id) throws CustomException {
+    public Result userDelete(@RequestBody Long id) throws CustomException {
         if (userService.removeById(id) == 1){
             return ResultFactory.buildSuccessResult(userService.findAll());
         }

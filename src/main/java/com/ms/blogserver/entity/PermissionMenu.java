@@ -14,7 +14,7 @@ import lombok.ToString;
 @TableName(value = "ms_permission_menu")
 public class PermissionMenu {
     //主键id
-    private int id;
+    private Long id;
     //permission id
     private int pid;
     //menu id

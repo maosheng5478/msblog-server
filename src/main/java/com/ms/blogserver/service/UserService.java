@@ -28,9 +28,9 @@ public interface UserService extends IService<User> {
     /**
      * 插入用户
      *
-     * @param user
+     * @param userDTO
      */
-    void insertUser(User user);
+    void insertUser(UserDTO userDTO);
 
     /**
      * 修改用户（乐观锁）

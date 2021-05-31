@@ -34,8 +34,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public void insertUser(User user) {
-        user.setPwd(EncryptPassword.encrypt(user.getPwd()));
+    public void insertUser(UserDTO userDTO) {
+        userDTO.setPwd(EncryptPassword.encrypt(userDTO.getPwd()));
+        User  user = UserDTOConverter.INSTANCE.fromData(userDTO);
         baseMapper.insert(user);
     }
 
@@ -44,8 +45,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (userDTO == null || userDTO.getId() == 0) {
             throw new CustomException(LoginContexts.AUTHENTIC_FAIL);
         }
-
-        System.out.println(userDTO);
         User user = getUserByID(userDTO.getId());
         if (!userDTO.getUsername().isEmpty()) {
             user.setUsername(userDTO.getUsername());

@@ -52,14 +52,14 @@ public class UserController {
     }
 
     @PostMapping(value = "/add")
-    public Result userAdd(@RequestBody User user){
-        String username = user.getUsername();
+    public Result userAdd(@RequestBody UserDTO userDTO){
+        String username = userDTO.getUsername();
         username = HtmlUtils.htmlEscape(username);
-        user.setUsername(username);
+        userDTO.setUsername(username);
         if (userService.hasUserName(username)){
             return ResultFactory.buildFailResult(LoginContexts.NAME_HAS_EXIST);
         }
-        userService.insertUser(user);
+        userService.insertUser(userDTO);
         return ResultFactory.buildSuccessResult(LoginContexts.REGISTER_SUCCESS);
     }
 

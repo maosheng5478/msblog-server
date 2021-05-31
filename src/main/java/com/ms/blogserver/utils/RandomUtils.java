@@ -24,4 +24,29 @@ public class RandomUtils {
         }
         return sb.toString();
     }
+
+    /**
+     *
+     *
+     * @param length
+     * @return
+     */
+    public static Integer getRandomInt(int length){
+        String num = "1234567890";
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            int number = random.nextInt(num.length());
+            sb.append(num.charAt(number));
+        }
+        return Integer.parseInt(sb.toString());
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static Integer getFourInt(){
+        return getRandomInt(4);
+    }
 }

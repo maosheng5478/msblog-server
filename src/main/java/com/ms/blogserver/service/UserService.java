@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ms.blogserver.entity.User;
 import com.ms.blogserver.entity.vo.PageVO;
+import com.ms.blogserver.entity.vo.UserVO;
 
 import java.util.List;
 
@@ -82,5 +83,5 @@ public interface UserService extends IService<User> {
      * 分页查询
      * @return
      */
-    PageVO<User> getPage();
+    PageVO<UserVO> getPage();
 }

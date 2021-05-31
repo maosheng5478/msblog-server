@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ms.blogserver.constant.LoginContexts;
 import com.ms.blogserver.constant.exception.CustomException;
+import com.ms.blogserver.converter.UserConverter;
 import com.ms.blogserver.entity.vo.PageVO;
+import com.ms.blogserver.entity.vo.UserVO;
 import com.ms.blogserver.utils.EncryptPassword;
 import com.ms.blogserver.entity.User;
 import com.ms.blogserver.mapper.UserMapper;
@@ -73,11 +75,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
     }
 
     @Override
-    public PageVO<User> getPage() {
+    public PageVO<UserVO> getPage() {
         IPage<User> iPage = new Page<>(1,5);
         baseMapper.selectPage(iPage,null);
-        PageVO<User> pageVO = new PageVO<>(iPage.getCurrent(),iPage.getSize(),iPage.getTotal());
-        pageVO.setList(iPage.getRecords());
+        List<UserVO> voList = UserConverter.INSTANCE.toListData(iPage.getRecords());
+        PageVO<UserVO> pageVO = new PageVO<>(iPage.getCurrent(),iPage.getSize(),iPage.getTotal());
+        pageVO.setList(voList);
         return pageVO;
     }
 }

@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ms.blogserver.constant.LoginContexts;
+import com.ms.blogserver.constant.exception.CustomException;
 import com.ms.blogserver.entity.vo.PageVO;
 import com.ms.blogserver.utils.EncryptPassword;
 import com.ms.blogserver.entity.User;
@@ -35,6 +37,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
 
     @Override
     public void updateUser(User user) {
+        if (user == null){
+            throw new CustomException(LoginContexts.AUTHENTIC_FAIL);
+        }else if (user.getId() == null){
+            throw new CustomException(LoginContexts.ID_IS_NULL);
+        }
         baseMapper.updateById(user);
     }
 

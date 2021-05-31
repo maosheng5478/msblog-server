@@ -42,4 +42,10 @@ public class TokenServiceImpl implements TokenService {
         }
         return false;
     }
+
+    @Override
+    public boolean hasLogin(String token) {
+        String account = TokenUtil.getAccount(token);
+        return redisUtil.hasKey(account);
+    }
 }

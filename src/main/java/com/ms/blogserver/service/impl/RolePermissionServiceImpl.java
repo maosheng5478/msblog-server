@@ -17,11 +17,10 @@ import java.util.stream.Collectors;
  */
 @Service
 public class RolePermissionServiceImpl extends ServiceImpl<RolePermissionMapper, RolePermission> implements RolePermissionService {
+
     @Override
-    public List<Integer> getAllMenuIdByRoleId(Integer roleId) {
-        return baseMapper.selectList(new QueryWrapper<RolePermission>().eq("rid",roleId))
-                .stream()
-                .map(RolePermission::getRid)
-                .collect(Collectors.toList());
+    public List<RolePermission> getAllPermissionByRoleId(Long roleId) {
+        List<RolePermission> list = baseMapper.selectList(new QueryWrapper<RolePermission>().eq("rid",roleId));
+        return list;
     }
 }

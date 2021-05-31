@@ -16,7 +16,7 @@ public class PermissionMenu {
     //主键id
     private Long id;
     //permission id
-    private int pid;
+    private Long pid;
     //menu id
     private int mid;
 

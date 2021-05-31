@@ -28,4 +28,6 @@ public interface LoginContexts {
     String REGISTER_SUCCESS = "注册成功";
 
     String TOKEN_ERROR = "token验证失败";
+
+    String ID_IS_NULL = "传入id不能为空";
 }

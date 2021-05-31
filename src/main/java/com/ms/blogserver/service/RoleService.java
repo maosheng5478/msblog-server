@@ -10,5 +10,5 @@ import com.ms.blogserver.entity.Role;
  */
 public interface RoleService extends IService<Role> {
 
-    Role findByID(int id);
+    Role findByID(Long id);
 }

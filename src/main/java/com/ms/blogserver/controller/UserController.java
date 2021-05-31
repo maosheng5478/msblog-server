@@ -1,6 +1,7 @@
 package com.ms.blogserver.controller;
 
 import com.ms.blogserver.constant.LoginContexts;
+import com.ms.blogserver.constant.exception.CustomException;
 import com.ms.blogserver.constant.result.ResultCode;
 import com.ms.blogserver.entity.User;
 import com.ms.blogserver.constant.result.Result;
@@ -18,6 +19,8 @@ import org.springframework.web.util.HtmlUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @Slf4j
@@ -30,26 +33,26 @@ public class UserController {
     private TokenService tokenService;
 
     @PostMapping(value = "api/authentication")
-    public Result authentication() throws Exception{
-        Subject subject = SecurityUtils.getSubject();
-        return subject.isAuthenticated() ? ResultFactory.buildSuccessResult("") :
+    public Result authentication(HttpServletRequest request){
+        String token = request.getHeader("token");
+        return tokenService.hasLogin(token)?
+                ResultFactory.buildSuccessResult("") :
                 ResultFactory.buildResult(ResultCode.UNAUTHORIZED,LoginContexts.NO_LOGIN_USER);
     }
 
     @PostMapping(value = "/login")
     public Result userLogin(String username, String pwd, HttpServletResponse response){
-        if (username == null){
-            return ResultFactory.buildFailResult(LoginContexts.INPUT_USER_NAME);
-        }else if(pwd == null){
-            return ResultFactory.buildFailResult(LoginContexts.INPUT_PASSWORD);
-        }
         String realPassword =userService.getPassword(username);
         if (realPassword == null){
             return ResultFactory.buildFailResult(LoginContexts.USER_IS_NOT_EXIST);
-        }else if (!realPassword.equals(EncryptPassword.encrypt(pwd))){
-            return ResultFactory.buildFailResult(LoginContexts.PASSWORD_IS_ERROR);
+        }else if (realPassword.equals(EncryptPassword.encrypt(pwd))){
+            Map<String,Object> map = new HashMap<>();
+            map.put("token",tokenService.CreateToken(username,response));
+            map.put("username",username);
+            map.put("id",userService.findByUserName(username).getId());
+            return ResultFactory.buildSuccessResult(map);
         }
-        return ResultFactory.buildSuccessResult(tokenService.CreateToken(username,response));
+        return ResultFactory.buildFailResult(LoginContexts.PASSWORD_IS_ERROR);
     }
 
     @PostMapping(value = "/add")
@@ -61,27 +64,20 @@ public class UserController {
             return ResultFactory.buildFailResult(LoginContexts.NAME_HAS_EXIST);
         }
         userService.insertUser(user);
-        //List<User> userList = userService.findAll();
         return ResultFactory.buildSuccessResult(LoginContexts.REGISTER_SUCCESS);
     }
 
     @PostMapping(value = "/update")
-    public Result userUpdate(@RequestBody User u){
-        User user = userService.getUserByID(1392754664565116930L);
-        user.setUsername("11131");
-        user.setPwd("131");
-        user.setEmail("123@qq.com");
-
-        userService.updateUser(user);
-        System.out.println();
+    public Result userUpdate(@RequestBody User u) throws CustomException {
+        userService.updateUser(u);
         return ResultFactory.buildSuccessResult(userService.findAll());
     }
     @PostMapping(value = "/remove")
-    public Result userDelete() throws Exception {
-        if (userService.removeById(1392754664565116930L) == 1){
+    public Result userDelete(Long  id) throws CustomException {
+        if (userService.removeById(id) == 1){
             return ResultFactory.buildSuccessResult(userService.findAll());
         }
-        throw new Exception("There is no data with ID "+ "1392754664565116930L"+" in the database");
+        throw new CustomException("There is no data with ID "+ id+" in the database");
 
     }
 

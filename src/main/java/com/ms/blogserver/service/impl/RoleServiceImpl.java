@@ -15,8 +15,7 @@ import org.springframework.stereotype.Service;
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements RoleService {
 
     @Override
-    public Role findByID(int id) {
-
+    public Role findByID(Long id) {
         return baseMapper.selectById(id);
     }
 }

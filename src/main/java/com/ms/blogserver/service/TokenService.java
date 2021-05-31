@@ -12,4 +12,6 @@ public interface TokenService {
     String CreateToken(String username, HttpServletResponse response);
 
     boolean removeToken(String token);
+
+    boolean hasLogin(String token);
 }

@@ -37,6 +37,13 @@ public class DefaultExceptionHandler {
         return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.DATA);
     }
 
+    @ExceptionHandler(CustomException.class)
+    @ResponseBody
+    public Result handleCustomException(CustomException e){
+        log.error(e.getMessage());
+        return ResultFactory.buildFailResult(e.getMessage());
+    }
+
     @ExceptionHandler({UnauthorizedException.class})
     @ResponseBody
     public Result handleUnauthorizedException(UnauthorizedException unauthorizedException) {

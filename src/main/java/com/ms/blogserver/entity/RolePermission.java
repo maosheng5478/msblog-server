@@ -18,7 +18,7 @@ public class RolePermission implements Serializable {
     //主键id
     private Long id;
     //role id
-    private int rid;
+    private Long rid;
     //permission id
-    private int pid;
+    private Long pid;
 }

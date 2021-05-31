@@ -14,6 +14,6 @@ import lombok.ToString;
 @TableName(value = "ms_user_role")
 public class UserRole {
     private Long id;
-    private int uid;
-    private int rid;
+    private Long uid;
+    private Long rid;
 }

@@ -12,5 +12,5 @@ import java.util.List;
  */
 public interface RolePermissionService extends IService<RolePermission> {
 
-    List<Integer> getAllMenuIdByRoleId(Integer roleId);
+    List<RolePermission> getAllPermissionByRoleId(Long roleId);
 }

@@ -1,5 +1,6 @@
 package com.ms.blogserver.service;
 
+import com.ms.blogserver.constant.exception.CustomException;
 import com.ms.blogserver.entity.User;
 import com.ms.blogserver.entity.vo.UserVO;
 
@@ -19,4 +20,10 @@ public interface TokenService {
     boolean hasLogin(String token);
 
     UserVO setToken(User user, String token);
+
+    void saveCode(Integer code);
+
+    boolean getVerifyCode(Integer code) throws CustomException;
+
+    void sendSMS(String phone);
 }

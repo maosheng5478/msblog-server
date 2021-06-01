@@ -2,16 +2,13 @@ package com.ms.blogserver.config.jwt;
 
 import com.alibaba.fastjson.JSONObject;
 import com.auth0.jwt.exceptions.TokenExpiredException;
-import com.ms.blogserver.constant.LoginContexts;
+import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.constant.result.ResultCode;
 import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.constant.result.ResultString;
-import com.ms.blogserver.utils.RedisUtil;
-import com.ms.blogserver.utils.TokenUtil;
-import org.apache.shiro.ShiroException;
+import com.ms.blogserver.utils.RedisUtils;
+import com.ms.blogserver.utils.TokenUtils;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authz.AuthorizationException;
-import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.slf4j.Logger;
@@ -26,7 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLEncoder;
 
 /**
  * @description:
@@ -37,7 +33,7 @@ import java.net.URLEncoder;
 public class JWTFilter extends BasicHttpAuthenticationFilter {
 
     @Autowired
-    private RedisUtil redisUtil;
+    private RedisUtils redisUtils;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
@@ -124,12 +120,12 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         String jwttoken= (String) token.getPrincipal();
         if (jwttoken!=null){
             try{
-                if(TokenUtil.verify(jwttoken)){
+                if(TokenUtils.verify(jwttoken)){
                     //判断Redis是否存在所对应的RefreshToken
-                    String account = TokenUtil.getAccount(jwttoken);
-                    Long currentTime=TokenUtil.getCurrentTime(jwttoken);
-                    if (redisUtil.hasKey(account)) {
-                        Long currentTimeMillisRedis = (Long) redisUtil.get(account);
+                    String account = TokenUtils.getAccount(jwttoken);
+                    Long currentTime= TokenUtils.getCurrentTime(jwttoken);
+                    if (redisUtils.hasKey(account)) {
+                        Long currentTimeMillisRedis = (Long) redisUtils.get(account);
                         if (currentTimeMillisRedis.equals(currentTime)) {
                             return true;
                         }
@@ -179,20 +175,20 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
      */
     private boolean refreshToken(ServletRequest request, ServletResponse response) {
         String token = ((HttpServletRequest)request).getHeader("token");
-        String account = TokenUtil.getAccount(token);
-        Long currentTime=TokenUtil.getCurrentTime(token);
+        String account = TokenUtils.getAccount(token);
+        Long currentTime= TokenUtils.getCurrentTime(token);
         // 判断Redis中RefreshToken是否存在
-        if (redisUtil.hasKey(account)) {
+        if (redisUtils.hasKey(account)) {
             // Redis中RefreshToken还存在，获取RefreshToken的时间戳
-            Long currentTimeMillisRedis = (Long) redisUtil.get(account);
+            Long currentTimeMillisRedis = (Long) redisUtils.get(account);
             // 获取当前AccessToken中的时间戳，与RefreshToken的时间戳对比，如果当前时间戳一致，进行AccessToken刷新
             if (currentTimeMillisRedis.equals(currentTime)) {
                 // 获取当前最新时间戳
                 Long currentTimeMillis =System.currentTimeMillis();
-                redisUtil.set(account, currentTimeMillis,
-                        TokenUtil.REFRESH_EXPIRE_TIME);
+                redisUtils.set(account, currentTimeMillis,
+                        TokenUtils.REFRESH_EXPIRE_TIME);
                 // 刷新AccessToken，设置时间戳为当前最新时间戳
-                token = TokenUtil.sign(account, currentTimeMillis);
+                token = TokenUtils.sign(account, currentTimeMillis);
                 HttpServletResponse httpServletResponse = (HttpServletResponse) response;
                 httpServletResponse.setHeader("Authorization", token);
                 httpServletResponse.setHeader("Access-Control-Expose-Headers", "Authorization");

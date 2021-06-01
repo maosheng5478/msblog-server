@@ -1,8 +1,8 @@
 package com.ms.blogserver.utils;
 
 
-import org.apache.http.HttpResponse;
-import org.apache.http.util.EntityUtils;
+import com.ms.blogserver.constant.exception.CustomException;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,27 +12,32 @@ import java.util.Map;
  * @author: zhh
  * @time: 2021/5/31
  */
+@Slf4j
 public class SMSVerify {
 
-    private static final String host = "http://dingxin.market.alicloudapi.com";
-    private static final String path = "/dx/sendSms";
-    private static final String method = "POST";
-    private static final String appcode = "6416008baa3d495a94bb4944fb788259";
+    private static final String HOST = "http://dingxin.market.alicloudapi.com";
+    private static final String PATH = "/dx/sendSms";
+    private static final String METHOD = "POST";
+    private static final String APPCODE = "6416008baa3d495a94bb4944fb788259";
+    private static final Integer CODE_LENGTH = 6;
 
-    public static void main(String[] args) {
+    public static Integer sendSMS(String phone){
+        Integer code = RandomUtils.getRandomInt(CODE_LENGTH);
         Map<String, String> headers = new HashMap<String, String>();
-        //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
-        headers.put("Authorization", "APPCODE " + appcode);
+        headers.put("Authorization", "APPCODE " + APPCODE);
         Map<String, String> querys = new HashMap<String, String>();
-        querys.put("mobile", "17759309269");
-        querys.put("param", "code:1234");
+        querys.put("mobile", phone);
+        querys.put("param", "code:"+code);
         querys.put("tpl_id", "TP1711063");
         Map<String, String> bodys = new HashMap<String, String>();
-
         try {
-            HttpResponse response = HttpUtils.doPost(host, path, method, headers, querys, bodys);
+            HttpUtils.doPost(HOST, PATH, METHOD, headers, querys, bodys);
+            log.debug("verify code:"+code);
+            return code;
         } catch (Exception e) {
             e.printStackTrace();
+            throw new CustomException("SMS Send Error:"+"服务器异常，请联系管理人员");
         }
     }
+
 }

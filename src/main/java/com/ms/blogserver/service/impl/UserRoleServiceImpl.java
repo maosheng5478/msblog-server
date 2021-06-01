@@ -2,7 +2,7 @@ package com.ms.blogserver.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ms.blogserver.constant.LoginContexts;
+import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.constant.exception.CustomException;
 import com.ms.blogserver.entity.UserRole;
 import com.ms.blogserver.mapper.UserRoleMapper;

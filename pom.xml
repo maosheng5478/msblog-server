@@ -63,7 +63,6 @@
             <version>2.9.2</version>
         </dependency>
         <!-- Spring 整合Shiro需要的依赖 -->
-
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
@@ -99,6 +98,7 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.3</version>
         </dependency>
+        <!--http (sms verify)-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
@@ -113,6 +113,12 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
+        </dependency>
+        <!--验证码图片生成-->
+        <dependency>
+            <groupId>com.github.whvcse</groupId>
+            <artifactId>easy-captcha</artifactId>
+            <version>1.6.2</version>
         </dependency>
        <!-- &lt;!&ndash;数据源&ndash;&gt;
         <dependency>

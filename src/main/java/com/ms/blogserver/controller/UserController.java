@@ -1,14 +1,15 @@
 package com.ms.blogserver.controller;
 
-import com.ms.blogserver.constant.LoginContexts;
+import com.ms.blogserver.constant.contexts.LoginContexts;
+import com.ms.blogserver.constant.contexts.VerifyContexts;
 import com.ms.blogserver.constant.exception.CustomException;
 import com.ms.blogserver.constant.result.ResultCode;
-import com.ms.blogserver.converter.dto.UserDTOConverter;
-import com.ms.blogserver.entity.User;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
+import com.ms.blogserver.entity.dto.LoginDTO;
 import com.ms.blogserver.entity.dto.UserDTO;
 import com.ms.blogserver.entity.vo.UserVO;
+import com.ms.blogserver.service.CaptchaService;
 import com.ms.blogserver.service.TokenService;
 import com.ms.blogserver.service.UserService;
 import com.ms.blogserver.utils.EncryptPassword;
@@ -30,6 +31,9 @@ public class UserController {
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private CaptchaService captchaService;
+
     @PostMapping(value = "api/authentication")
     public Result authentication(HttpServletRequest request){
         String token = request.getHeader("token");
@@ -39,20 +43,26 @@ public class UserController {
     }
 
     @PostMapping(value = "/login")
-    public Result userLogin(String username, String pwd, HttpServletResponse response){
+    public Result userLogin(@RequestBody LoginDTO loginDTO, HttpServletResponse response){
+        String username = loginDTO.getUsername();
+        String pwd = loginDTO.getPassword();
+        //判断验证码
+        captchaService.verifyArithmetic(loginDTO.getKey(), loginDTO.getCode());
         String realPassword =userService.getPassword(username);
         if (realPassword == null){
             return ResultFactory.buildFailResult(LoginContexts.USER_IS_NOT_EXIST);
         }else if (realPassword.equals(EncryptPassword.encrypt(pwd))){
             UserVO userVO = tokenService.setToken(userService.findByUserName(username),tokenService.CreateToken(username,response));
-            System.out.println("uservo:" + userVO);
             return ResultFactory.buildSuccessResult(userVO);
         }
         return ResultFactory.buildFailResult(LoginContexts.PASSWORD_IS_ERROR);
     }
 
     @PostMapping(value = "/add")
-    public Result userAdd(@RequestBody UserDTO userDTO){
+    public Result userAdd(@RequestBody UserDTO userDTO,Integer code){
+        if (!tokenService.getVerifyCode(code)){
+            return ResultFactory.buildFailResult(VerifyContexts.VERIFY_ERROR);
+        }
         String username = userDTO.getUsername();
         username = HtmlUtils.htmlEscape(username);
         userDTO.setUsername(username);

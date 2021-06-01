@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
  */
 
 @Service
-public class RedisUtil {
+public class RedisUtils {
     @Resource
     private RedisTemplate redisTemplate;
 

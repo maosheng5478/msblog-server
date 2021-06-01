@@ -1,13 +1,11 @@
 package com.ms.blogserver.constant.exception;
 
-import com.ms.blogserver.constant.LoginContexts;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultCode;
 import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.constant.result.ResultString;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.ShiroException;
-import org.apache.shiro.authz.AuthorizationException;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -41,6 +39,7 @@ public class DefaultExceptionHandler {
     @ResponseBody
     public Result handleCustomException(CustomException e){
         log.error(e.getMessage());
+        e.printStackTrace();
         return ResultFactory.buildFailResult(e.getMessage());
     }
 

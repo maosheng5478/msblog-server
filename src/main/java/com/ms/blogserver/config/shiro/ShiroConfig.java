@@ -49,8 +49,9 @@ public class ShiroConfig {
         //放行登录接口和其他不需要权限的接口
         filterRuleMap.put("/login", "anon");
         filterRuleMap.put("/logout", "anon");
+        filterRuleMap.put("/code/**","anon");
         filterRuleMap.put("/err/**","anon");
-        // 所有请求通过我们自己的JWT Filter
+        // 所有请求通过JWT Filter
         filterRuleMap.put("/**", "jwt");
         factoryBean.setFilterChainDefinitionMap(filterRuleMap);
         return factoryBean;

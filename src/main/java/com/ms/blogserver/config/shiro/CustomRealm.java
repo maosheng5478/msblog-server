@@ -4,7 +4,7 @@ import com.ms.blogserver.config.jwt.JWTToken;
 
 import com.ms.blogserver.entity.User;
 import com.ms.blogserver.service.UserService;
-import com.ms.blogserver.utils.TokenUtil;
+import com.ms.blogserver.utils.TokenUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -46,7 +46,7 @@ public class CustomRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         log.info("身份认证");
         String token= (String) authenticationToken.getCredentials();
-        String username= TokenUtil.getAccount(token);
+        String username= TokenUtils.getAccount(token);
         //这里要去数据库查找是否存在该用户，这里直接放行
         User user = userService.findByUserName(username);
         if (user==null){

@@ -1,4 +1,4 @@
-package com.ms.blogserver.constant;
+package com.ms.blogserver.constant.contexts;
 
 import com.ms.blogserver.aspect.annotation.PermissionCheck;
 
@@ -30,4 +30,5 @@ public interface LoginContexts {
     String TOKEN_ERROR = "token验证失败";
 
     String ID_IS_NULL = "传入id不能为空";
+
 }

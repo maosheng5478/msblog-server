@@ -2,6 +2,8 @@ package com.ms.blogserver.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.Version;
 import lombok.Data;
 import lombok.ToString;
 
@@ -16,10 +18,21 @@ import java.time.LocalTime;
  */
 @Data
 @ToString
+@TableName(value = "ms_article")
 public class Article implements Serializable {
-    private Integer id;
+    private Long id;
     private String title;
+    private String content;
+    private String contentMd;
+    private String writer;
+    private String cover;
+    private Integer likes;
     @TableField(value = "create_time",fill = FieldFill.INSERT)
-    private LocalTime create_time;
+    private LocalTime createTime;
+    @TableField(value = "update_time",fill = FieldFill.UPDATE)
+    private LocalTime updateTime;
+    @Version
+    @TableField(fill = FieldFill.INSERT)
+    private Integer version;
 
 }

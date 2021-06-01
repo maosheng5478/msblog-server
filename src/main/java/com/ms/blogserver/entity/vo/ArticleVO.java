@@ -19,5 +19,5 @@ public class ArticleVO {
     private String cover;
     private Integer likes;
 
-    //文章留言
+    //文章评论
 }

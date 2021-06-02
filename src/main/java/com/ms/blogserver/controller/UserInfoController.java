@@ -7,6 +7,7 @@ import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.entity.dto.BaseDTO;
 import com.ms.blogserver.service.MenuService;
 import com.ms.blogserver.service.UserService;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,7 @@ public class UserInfoController {
         return ResultFactory.buildSuccessResult(menuService.getMenusByCurrentUser(uid));
     }
     @PostMapping(value = "/user/page")
+    @RequiresRoles(value = "")
     public Result getByPage(BaseDTO dto){
         return ResultFactory.buildSuccessResult(userService.getPage(dto));
     }

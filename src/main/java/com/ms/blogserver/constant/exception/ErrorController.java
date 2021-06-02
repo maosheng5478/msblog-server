@@ -5,7 +5,9 @@ import com.ms.blogserver.constant.result.ResultCode;
 import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.constant.result.ResultString;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -21,6 +23,7 @@ public class ErrorController {
      * 404页面
      */
     @RequestMapping(value = "/404")
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public Result error_404() {
         log.warn(ResultCode.NOT_FOUND.CODE+":"+ResultString.PAGE_NO_FOUND.DATA);
         return ResultFactory.buildResult(ResultCode.NOT_FOUND, ResultString.PAGE_NO_FOUND.DATA);
@@ -48,6 +51,7 @@ public class ErrorController {
      * 401页面
      */
     @RequestMapping(value = "/401")
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public Result error_401() {
         log.warn(ResultCode.UNAUTHORIZED.CODE+":"+ResultString.NO_AUTHORIZED.DATA);
         return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.DATA);

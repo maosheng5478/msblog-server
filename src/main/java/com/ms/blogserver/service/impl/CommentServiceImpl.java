@@ -33,8 +33,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     @Override
     public List<Comment> getAllCommentByArticleId(Long articleId) {
-        List<Comment> article_id = baseMapper.selectList(new QueryWrapper<Comment>().eq("article_id", articleId));
-        return article_id;
+        return baseMapper.selectList(new QueryWrapper<Comment>().eq("article_id", articleId));
     }
 
     @Override

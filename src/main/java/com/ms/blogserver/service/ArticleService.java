@@ -1,7 +1,9 @@
 package com.ms.blogserver.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.entity.Article;
+import com.ms.blogserver.entity.vo.ArticleVO;
 import com.ms.blogserver.entity.vo.PageVO;
 
 /**
@@ -11,6 +13,9 @@ import com.ms.blogserver.entity.vo.PageVO;
  */
 public interface ArticleService extends IService<Article> {
 
-    PageVO getPage();
+    ArticleVO getArticleById(Long id);
+
+    PageInfo getPage();
+
 
 }

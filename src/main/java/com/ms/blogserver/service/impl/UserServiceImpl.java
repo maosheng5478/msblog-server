@@ -4,10 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.constant.exception.CustomException;
 import com.ms.blogserver.converter.dto.UserDTOConverter;
 import com.ms.blogserver.converter.vo.UserVOConverter;
+import com.ms.blogserver.entity.dto.BaseDTO;
 import com.ms.blogserver.entity.dto.UserDTO;
 import com.ms.blogserver.entity.vo.PageVO;
 import com.ms.blogserver.entity.vo.UserVO;
@@ -15,6 +18,7 @@ import com.ms.blogserver.utils.EncryptPassword;
 import com.ms.blogserver.entity.User;
 import com.ms.blogserver.mapper.UserMapper;
 import com.ms.blogserver.service.UserService;
+import com.ms.blogserver.utils.PageInfoUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -89,12 +93,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public PageVO<UserVO> getPage() {
-        IPage<User> iPage = new Page<>(1, 5);
-        baseMapper.selectPage(iPage, null);
-        List<UserVO> voList = UserVOConverter.INSTANCE.toDataList(iPage.getRecords());
-        PageVO<UserVO> pageVO = new PageVO<>(iPage.getCurrent(), iPage.getSize(), iPage.getTotal());
-        pageVO.setList(voList);
-        return pageVO;
+    public PageInfo<UserVO> getPage(BaseDTO dto) {
+        PageHelper.startPage(dto.getPage(),dto.getSize());
+        List<User> userList =findAll();
+        List<UserVO> voList = UserVOConverter.INSTANCE.toDataList(userList);
+        PageInfo<UserVO> userVOPageInfo = new PageInfo<>();
+        PageInfoUtil.transform(new PageInfo<>(userList),userVOPageInfo);
+        userVOPageInfo.setList(voList);
+        return userVOPageInfo;
     }
 }

@@ -10,7 +10,7 @@ import lombok.ToString;
  */
 @Data
 @ToString
-public class UserDTO {
+public class UserDTO extends BaseDTO{
     private Long id;
     private String username;
     private String pwd;

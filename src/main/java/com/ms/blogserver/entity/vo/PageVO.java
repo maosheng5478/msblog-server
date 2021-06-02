@@ -14,9 +14,9 @@ import java.util.List;
 @ToString
 public class PageVO<T> {
     //当前页，默认为1
-    private Long current ;
+    private Long current = 1L;
     //每页数量，默认为5
-    private Long size ;
+    private Long size = 5L;
     // 是否有下一页
     private int isMore;
     // 总记录数

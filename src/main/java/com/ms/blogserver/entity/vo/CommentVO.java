@@ -3,24 +3,24 @@ package com.ms.blogserver.entity.vo;
 import lombok.Data;
 import lombok.ToString;
 
+import java.time.LocalTime;
 import java.util.List;
 
 /**
  * @description:
  * @author: zhh
- * @time: 2021/6/1
+ * @time: 2021/6/2
  */
 @Data
 @ToString
-public class ArticleVO {
+public class CommentVO {
     private Long id;
-    private String title;
     private String content;
-    private String contentMd;
-    private String writer;
-    private String cover;
+    private String commenter;
+    private String respondent;
     private Integer likes;
+    private Long parentId;
+    private LocalTime create_time;
 
-    //文章评论
-    private List<CommentVO> commentVOS;
+    private List<CommentVO> children;
 }

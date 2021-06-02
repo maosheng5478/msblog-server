@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 @Data
 @ToString
-public class LoginDTO implements Serializable {
+public class LoginDTO extends BaseDTO {
 
     private String username;
     private String password;

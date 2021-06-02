@@ -4,6 +4,7 @@ import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.constant.exception.CustomException;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
+import com.ms.blogserver.entity.dto.BaseDTO;
 import com.ms.blogserver.service.MenuService;
 import com.ms.blogserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,8 @@ public class UserInfoController {
         return ResultFactory.buildSuccessResult(menuService.getMenusByCurrentUser(uid));
     }
     @PostMapping(value = "/user/page")
-    public Result getByPage(){
-        return ResultFactory.buildSuccessResult(userService.getPage());
+    public Result getByPage(BaseDTO dto){
+        return ResultFactory.buildSuccessResult(userService.getPage(dto));
     }
 
 

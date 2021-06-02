@@ -1,0 +1,78 @@
+package com.ms.blogserver.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageInfo;
+import com.ms.blogserver.converter.bo.CommentBOConverter;
+import com.ms.blogserver.converter.vo.CommentVOConverter;
+import com.ms.blogserver.entity.Comment;
+import com.ms.blogserver.entity.bo.CommentBO;
+import com.ms.blogserver.entity.dto.BaseDTO;
+import com.ms.blogserver.entity.dto.GetCommentDTO;
+import com.ms.blogserver.entity.vo.CommentVO;
+import com.ms.blogserver.mapper.CommentMapper;
+import com.ms.blogserver.service.CommentService;
+import com.ms.blogserver.service.UserService;
+import com.ms.blogserver.utils.PageInfoUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.github.pagehelper.PageHelper;
+
+import java.util.List;
+
+/**
+ * @description:
+ * @author: zhh
+ * @time: 2021/6/2
+ */
+@Service
+public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> implements CommentService {
+
+    @Autowired
+    private UserService userService;
+
+    @Override
+    public List<Comment> getAllCommentByArticleId(Long articleId) {
+        List<Comment> article_id = baseMapper.selectList(new QueryWrapper<Comment>().eq("article_id", articleId));
+        return article_id;
+    }
+
+    @Override
+    public List<CommentVO> getParentId(Long pid) {
+        List<Comment> list = baseMapper.selectList(new QueryWrapper<Comment>().eq("parent_id", pid));
+        List<CommentBO> commentBOList = CommentBOConverter.INSTANCE.toDataList(list);
+        return setString(commentBOList);
+    }
+
+    @Override
+    public PageInfo<CommentVO> getPageByArticle(GetCommentDTO dto) {
+        PageHelper.startPage(dto.getPage(), dto.getSize());
+        List<Comment> allComment = getAllCommentByArticleId(dto.getArticleId());
+        List<CommentBO> commentBOList = CommentBOConverter.INSTANCE.toDataList(allComment);
+        List<CommentVO> commentVOList = setString(commentBOList);
+        handle(commentVOList);
+        PageInfo<CommentVO> commentVOPageInfo = new PageInfo<>();
+        PageInfoUtil.transform(new PageInfo<>(allComment),commentVOPageInfo);
+        commentVOPageInfo.setList(commentVOList);
+        return commentVOPageInfo;
+    }
+
+    private  List<CommentVO> setString(List<CommentBO> commentBOList) {
+        commentBOList.forEach(commentBO -> {
+            commentBO.setCommenter(userService.getUserByID(commentBO.getCommenterId()).getUsername());
+            Long resID = commentBO.getRespondentId();
+            if (resID != 0){
+                commentBO.setRespondent(userService.getUserByID(resID).getUsername());
+            }
+        });
+        return CommentVOConverter.INSTANCE.toDataList(commentBOList);
+    }
+
+    private void handle(List<CommentVO> list){
+        list.forEach(commentVO -> {
+            List<CommentVO> children =getParentId(commentVO.getId());
+            commentVO.setChildren(children);
+        });
+        list.removeIf(commentVO -> commentVO.getParentId() != 0);
+    }
+}

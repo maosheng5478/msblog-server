@@ -1,7 +1,9 @@
 package com.ms.blogserver.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.entity.User;
+import com.ms.blogserver.entity.dto.BaseDTO;
 import com.ms.blogserver.entity.dto.UserDTO;
 import com.ms.blogserver.entity.vo.PageVO;
 import com.ms.blogserver.entity.vo.UserVO;
@@ -82,6 +84,7 @@ public interface UserService extends IService<User> {
     /**
      * 分页查询
      * @return
+     * @param dto
      */
-    PageVO<UserVO> getPage();
+    PageInfo<UserVO> getPage(BaseDTO dto);
 }

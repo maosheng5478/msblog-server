@@ -47,7 +47,7 @@ public class UserController {
         String username = loginDTO.getUsername();
         String pwd = loginDTO.getPassword();
         //判断验证码
-        captchaService.verifyArithmetic(loginDTO.getKey(), loginDTO.getCode());
+        //captchaService.verifyArithmetic(loginDTO.getKey(), loginDTO.getCode());
         String realPassword =userService.getPassword(username);
         if (realPassword == null){
             return ResultFactory.buildFailResult(LoginContexts.USER_IS_NOT_EXIST);

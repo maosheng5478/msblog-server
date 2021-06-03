@@ -6,7 +6,7 @@ import com.ms.blogserver.constant.contexts.VerifyContexts;
 import com.ms.blogserver.constant.exception.CustomException;
 import com.ms.blogserver.converter.vo.UserVOConverter;
 import com.ms.blogserver.entity.User;
-import com.ms.blogserver.entity.vo.UserVO;
+import com.ms.blogserver.vo.UserVO;
 import com.ms.blogserver.service.TokenService;
 import com.ms.blogserver.utils.RedisUtils;
 import com.ms.blogserver.utils.RegularUtils;

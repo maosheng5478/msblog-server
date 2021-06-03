@@ -1,4 +1,4 @@
-package com.ms.blogserver.entity.vo;
+package com.ms.blogserver.vo;
 
 import lombok.Data;
 import lombok.ToString;

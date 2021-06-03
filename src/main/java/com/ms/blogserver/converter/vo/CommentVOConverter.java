@@ -1,12 +1,9 @@
 package com.ms.blogserver.converter.vo;
 
 import com.ms.blogserver.converter.Converter;
-import com.ms.blogserver.entity.Comment;
-import com.ms.blogserver.entity.bo.CommentBO;
-import com.ms.blogserver.entity.vo.CommentVO;
+import com.ms.blogserver.bo.CommentBO;
+import com.ms.blogserver.vo.CommentVO;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
 
 /**
  * @description:

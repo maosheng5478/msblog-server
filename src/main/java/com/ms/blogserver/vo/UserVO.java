@@ -1,4 +1,4 @@
-package com.ms.blogserver.entity.dto;
+package com.ms.blogserver.vo;
 
 import lombok.Data;
 import lombok.ToString;
@@ -10,10 +10,10 @@ import lombok.ToString;
  */
 @Data
 @ToString
-public class UserDTO extends BaseDTO{
-    private Long id;
+public class UserVO {
+    private Long id ;
     private String username;
-    private String pwd;
     private String phone;
     private String email;
+    private String token;
 }

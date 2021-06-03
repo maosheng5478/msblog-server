@@ -2,8 +2,7 @@ package com.ms.blogserver.controller;
 
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
-import com.ms.blogserver.entity.dto.BaseDTO;
-import com.ms.blogserver.entity.dto.GetCommentDTO;
+import com.ms.blogserver.dto.GetCommentDTO;
 import com.ms.blogserver.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.ms.blogserver.entity.dto;
+package com.ms.blogserver.dto;
 
 import com.ms.blogserver.constant.contexts.DigitalContexts;
 import lombok.ToString;

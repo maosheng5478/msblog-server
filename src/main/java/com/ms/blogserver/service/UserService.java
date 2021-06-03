@@ -3,10 +3,9 @@ package com.ms.blogserver.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.entity.User;
-import com.ms.blogserver.entity.dto.BaseDTO;
-import com.ms.blogserver.entity.dto.UserDTO;
-import com.ms.blogserver.entity.vo.PageVO;
-import com.ms.blogserver.entity.vo.UserVO;
+import com.ms.blogserver.dto.BaseDTO;
+import com.ms.blogserver.dto.UserDTO;
+import com.ms.blogserver.vo.UserVO;
 
 import java.util.List;
 

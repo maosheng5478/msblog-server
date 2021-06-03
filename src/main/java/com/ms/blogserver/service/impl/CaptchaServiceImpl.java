@@ -3,7 +3,7 @@ package com.ms.blogserver.service.impl;
 import com.ms.blogserver.constant.contexts.DigitalContexts;
 import com.ms.blogserver.constant.contexts.VerifyContexts;
 import com.ms.blogserver.constant.exception.CustomException;
-import com.ms.blogserver.entity.vo.CaptchaVO;
+import com.ms.blogserver.vo.CaptchaVO;
 import com.ms.blogserver.service.CaptchaService;
 import com.ms.blogserver.utils.RedisUtils;
 import com.ms.blogserver.utils.VerifyCodeUtils;

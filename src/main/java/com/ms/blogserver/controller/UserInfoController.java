@@ -4,7 +4,7 @@ import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.constant.exception.CustomException;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
-import com.ms.blogserver.entity.dto.BaseDTO;
+import com.ms.blogserver.dto.BaseDTO;
 import com.ms.blogserver.service.MenuService;
 import com.ms.blogserver.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresRoles;

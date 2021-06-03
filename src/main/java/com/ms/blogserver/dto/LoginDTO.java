@@ -1,9 +1,7 @@
-package com.ms.blogserver.entity.dto;
+package com.ms.blogserver.dto;
 
 import lombok.Data;
 import lombok.ToString;
-
-import java.io.Serializable;
 
 /**
  * @description:

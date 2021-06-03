@@ -3,9 +3,8 @@ package com.ms.blogserver.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.entity.Comment;
-import com.ms.blogserver.entity.dto.BaseDTO;
-import com.ms.blogserver.entity.dto.GetCommentDTO;
-import com.ms.blogserver.entity.vo.CommentVO;
+import com.ms.blogserver.dto.GetCommentDTO;
+import com.ms.blogserver.vo.CommentVO;
 
 import java.util.List;
 

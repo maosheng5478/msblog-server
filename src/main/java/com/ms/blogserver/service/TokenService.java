@@ -2,7 +2,7 @@ package com.ms.blogserver.service;
 
 import com.ms.blogserver.constant.exception.CustomException;
 import com.ms.blogserver.entity.User;
-import com.ms.blogserver.entity.vo.UserVO;
+import com.ms.blogserver.vo.UserVO;
 
 import javax.servlet.http.HttpServletResponse;
 

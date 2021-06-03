@@ -2,19 +2,16 @@ package com.ms.blogserver.controller;
 
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
-import com.ms.blogserver.entity.vo.CaptchaVO;
+import com.ms.blogserver.vo.CaptchaVO;
 import com.ms.blogserver.service.CaptchaService;
 import com.ms.blogserver.service.TokenService;
 import com.ms.blogserver.utils.RedisUtils;
-import com.wf.captcha.ArithmeticCaptcha;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.io.IOException;
 

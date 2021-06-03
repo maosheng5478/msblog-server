@@ -1,6 +1,6 @@
 package com.ms.blogserver.service;
 
-import com.ms.blogserver.entity.vo.CaptchaVO;
+import com.ms.blogserver.vo.CaptchaVO;
 
 import java.awt.*;
 import java.io.IOException;

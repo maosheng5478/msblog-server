@@ -2,7 +2,7 @@ package com.ms.blogserver.converter.bo;
 
 import com.ms.blogserver.converter.Converter;
 import com.ms.blogserver.entity.Comment;
-import com.ms.blogserver.entity.bo.CommentBO;
+import com.ms.blogserver.bo.CommentBO;
 import org.mapstruct.factory.Mappers;
 
 /**

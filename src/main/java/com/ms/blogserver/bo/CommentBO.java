@@ -1,4 +1,4 @@
-package com.ms.blogserver.entity.bo;
+package com.ms.blogserver.bo;
 
 import lombok.Data;
 

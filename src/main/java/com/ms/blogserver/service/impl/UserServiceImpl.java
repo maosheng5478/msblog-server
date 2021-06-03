@@ -1,8 +1,6 @@
 package com.ms.blogserver.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -10,10 +8,9 @@ import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.constant.exception.CustomException;
 import com.ms.blogserver.converter.dto.UserDTOConverter;
 import com.ms.blogserver.converter.vo.UserVOConverter;
-import com.ms.blogserver.entity.dto.BaseDTO;
-import com.ms.blogserver.entity.dto.UserDTO;
-import com.ms.blogserver.entity.vo.PageVO;
-import com.ms.blogserver.entity.vo.UserVO;
+import com.ms.blogserver.dto.BaseDTO;
+import com.ms.blogserver.dto.UserDTO;
+import com.ms.blogserver.vo.UserVO;
 import com.ms.blogserver.utils.EncryptPassword;
 import com.ms.blogserver.entity.User;
 import com.ms.blogserver.mapper.UserMapper;

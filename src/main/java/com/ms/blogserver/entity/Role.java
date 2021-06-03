@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 @Data
 @ToString
-@TableName(value = "me_role")
+@TableName(value = "ms_role")
 public class Role implements Serializable {
     private Long id;
     private String name;

@@ -79,7 +79,7 @@ public class CustomRealm extends AuthorizingRealm {
         //获得该用户角色
         Role role = roleService.findByID(userRoleService.getRidByUid(user.getId()));
         Set<String> roleSet = new HashSet<>();
-        roleSet.add(role.getNameZh());
+        roleSet.add(role.getName());
         info.setRoles(roleSet);
         return info;
     }

@@ -31,4 +31,6 @@ public interface LoginContexts {
 
     String ID_IS_NULL = "传入id不能为空";
 
+    String INSUFFICIENT_USER_PERMISSIONS = "用户权限不足";
+
 }

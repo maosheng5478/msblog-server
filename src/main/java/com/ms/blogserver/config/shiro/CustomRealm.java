@@ -2,7 +2,10 @@ package com.ms.blogserver.config.shiro;
 
 import com.ms.blogserver.config.jwt.JWTToken;
 
+import com.ms.blogserver.entity.Role;
 import com.ms.blogserver.entity.User;
+import com.ms.blogserver.service.RoleService;
+import com.ms.blogserver.service.UserRoleService;
 import com.ms.blogserver.service.UserService;
 import com.ms.blogserver.utils.TokenUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +20,9 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
+import java.util.Set;
+
 
 /**
  * @description:
@@ -28,9 +34,14 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class CustomRealm extends AuthorizingRealm {
 
-
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRoleService userRoleService;
+
+    @Autowired
+    private RoleService roleService;
 
     /**
      * 必须重写此方法，不然会报错
@@ -65,23 +76,12 @@ public class CustomRealm extends AuthorizingRealm {
         String username = TokenUtils.getAccount(principals.toString());
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         User user = userService.findByUserName(username);
-//        //获得该用户角色
-//        String role = userService.getRole(username);
-//        //每个角色拥有默认的权限
-//        String rolePermission = userService.getRolePermission(username);
-//        //每个用户可以设置新的权限
-//        String permission = userService.getPermission(username);
-//        Set<String> roleSet = new HashSet<>();
-//        Set<String> permissionSet = new HashSet<>();
-//        //需要将 role, permission 封装到 Set 作为 info.setRoles(), info.setStringPermissions() 的参数
-//        roleSet.add(role);
-//        permissionSet.add(rolePermission);
-//        permissionSet.add(permission);
-//        //设置该用户拥有的角色和权限
-//        info.setRoles(roleSet);
-//        info.setStringPermissions(permissionSet);
-//        return info;
-        return null;
+        //获得该用户角色
+        Role role = roleService.findByID(userRoleService.getRidByUid(user.getId()));
+        Set<String> roleSet = new HashSet<>();
+        roleSet.add(role.getNameZh());
+        info.setRoles(roleSet);
+        return info;
     }
 
 }

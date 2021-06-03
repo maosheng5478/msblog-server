@@ -11,6 +11,7 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,9 +62,9 @@ public class CustomRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-//        System.out.println("————权限认证————");
-//        String username = JWTUtil.getUsername(principals.toString());
-//        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        String username = TokenUtils.getAccount(principals.toString());
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        User user = userService.findByUserName(username);
 //        //获得该用户角色
 //        String role = userService.getRole(username);
 //        //每个角色拥有默认的权限

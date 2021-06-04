@@ -10,4 +10,11 @@ import lombok.Data;
 @Data
 public class GetCommentDTO extends BaseDTO{
     private Long articleId;
+
+    public GetCommentDTO(Long articleId) {
+        this.articleId = articleId;
+    }
+
+    public GetCommentDTO() {
+    }
 }

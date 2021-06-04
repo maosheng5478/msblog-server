@@ -1,5 +1,6 @@
 package com.ms.blogserver.vo;
 
+import com.github.pagehelper.PageInfo;
 import lombok.Data;
 import lombok.ToString;
 
@@ -24,5 +25,5 @@ public class ArticleVO {
     private String typeName;
 
     //文章评论
-    private List<CommentVO> commentVOS;
+    private PageInfo<CommentVO> commentVOS;
 }

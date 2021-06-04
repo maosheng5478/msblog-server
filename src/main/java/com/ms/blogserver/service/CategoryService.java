@@ -9,4 +9,6 @@ import com.ms.blogserver.entity.Category;
  * @time: 2021/6/4
  */
 public interface CategoryService extends IService<Category> {
+
+    String getCategoryByCid(Integer categoryId);
 }

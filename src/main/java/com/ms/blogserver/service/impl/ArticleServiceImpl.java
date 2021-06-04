@@ -5,17 +5,17 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.ms.blogserver.converter.ArticleVOConverter;
+import com.ms.blogserver.converter.vo.ArticleVOConverter;
 import com.ms.blogserver.dto.ArticleDTO;
+import com.ms.blogserver.dto.GetCommentDTO;
 import com.ms.blogserver.entity.Article;
-import com.ms.blogserver.entity.Category;
-import com.ms.blogserver.service.CaptchaService;
 import com.ms.blogserver.service.CategoryService;
 import com.ms.blogserver.service.CommentService;
 import com.ms.blogserver.utils.PageInfoUtil;
 import com.ms.blogserver.vo.ArticleVO;
 import com.ms.blogserver.mapper.ArticleMapper;
 import com.ms.blogserver.service.ArticleService;
+import com.ms.blogserver.vo.CommentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,8 +39,11 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     @Override
     public ArticleVO getArticleById(Long id) {
         Article article = baseMapper.selectById(id);
-
-        return null;
+        ArticleVO articleVO = ArticleVOConverter.INSTANCE.toData(article);
+        articleVO.setTypeName(categoryService.getCategoryByCid(article.getType()));
+        PageInfo<CommentVO> commentVOPageInfo = commentService.getPageByArticle(new GetCommentDTO(id));
+        articleVO.setCommentVOS(commentVOPageInfo);
+        return articleVO;
     }
 
     @Override
@@ -54,9 +57,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         List<ArticleVO> list = ArticleVOConverter.INSTANCE.toDataList(articleList);
         // 添加分类
         list.forEach(articleVO -> {
-            Category category = categoryService.getOne(new LambdaQueryWrapper<Category>()
-                    .eq(Category::getCategoryId,articleVO.getType()));
-            articleVO.setTypeName(category.getCategory());
+            articleVO.setTypeName(categoryService.getCategoryByCid(articleVO.getType()));
         });
         PageInfo<ArticleVO> res = new PageInfo<>();
         // PageInfo转换

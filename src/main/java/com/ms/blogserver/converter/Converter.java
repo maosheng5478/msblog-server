@@ -1,4 +1,4 @@
-package com.ms.blogserver.converter.core;
+package com.ms.blogserver.converter;
 
 import java.io.Serializable;
 import java.util.List;

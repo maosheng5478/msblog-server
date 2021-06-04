@@ -1,6 +1,6 @@
-package com.ms.blogserver.converter;
+package com.ms.blogserver.converter.dto;
 
-import com.ms.blogserver.converter.core.Converter;
+import com.ms.blogserver.converter.Converter;
 import com.ms.blogserver.entity.User;
 import com.ms.blogserver.dto.UserDTO;
 import org.mapstruct.factory.Mappers;

@@ -33,6 +33,7 @@ public class ErrorController {
      * 500页面
      */
     @RequestMapping(value = "/500")
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result error_500() {
         log.warn(ResultCode.INTERNAL_SERVER_ERROR.CODE+":"+ResultString.INTERNAL_ERROR.DATA);
         return ResultFactory.buildResult(ResultCode.INTERNAL_SERVER_ERROR,ResultString.INTERNAL_ERROR.DATA);

@@ -9,4 +9,7 @@ import com.ms.blogserver.entity.Permission;
  * @time: 2021/5/27
  */
 public interface PermissionService extends IService<Permission> {
+
+    String getNameById(Long pid);
 }
+

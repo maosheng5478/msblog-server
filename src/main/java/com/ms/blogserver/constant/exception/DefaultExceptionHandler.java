@@ -34,6 +34,7 @@ public class DefaultExceptionHandler {
     public Result handleShiroException(ShiroException e,UnauthorizedException unauthorizedException) {
         e.printStackTrace();
         unauthorizedException.printStackTrace();
+        log.error("handleShiroException:shiro authorized error");
         return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.DATA);
     }
 
@@ -55,7 +56,7 @@ public class DefaultExceptionHandler {
     @ResponseBody
     public Result handleAuthorizationException(AuthorizationException e){
         //e.printStackTrace();
-        log.error(LoginContexts.INSUFFICIENT_USER_PERMISSIONS);
+        log.error("handleAuthorizationException:"+LoginContexts.INSUFFICIENT_USER_PERMISSIONS);
         return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, LoginContexts.INSUFFICIENT_USER_PERMISSIONS);
     }
 
@@ -65,6 +66,7 @@ public class DefaultExceptionHandler {
     @ExceptionHandler(NoHandlerFoundException.class)
     public Result handle(NoHandlerFoundException e) {
         e.printStackTrace();
+        log.error(e.getMessage());
         return ResultFactory.buildResult(ResultCode.NOT_FOUND,ResultString.PAGE_NO_FOUND.DATA);
     }
     /**

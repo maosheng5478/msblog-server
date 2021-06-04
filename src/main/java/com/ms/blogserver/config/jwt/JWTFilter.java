@@ -8,6 +8,7 @@ import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.constant.result.ResultString;
 import com.ms.blogserver.utils.RedisUtils;
 import com.ms.blogserver.utils.TokenUtils;
+import org.apache.shiro.ShiroException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
@@ -51,8 +52,8 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
                 return executeLogin(request, response);
             } catch (Exception e) {
                 System.out.println("错误" + e);
-                //throw new ShiroException(e.getMessage());
-                responseError(response, "shiro fail");
+                throw new ShiroException(e.getMessage());
+                //responseError(response, "shiro fail");
                 //return false;
             }
         }

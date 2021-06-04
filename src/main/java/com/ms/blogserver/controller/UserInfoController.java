@@ -1,6 +1,8 @@
 package com.ms.blogserver.controller;
 
 import com.ms.blogserver.constant.contexts.LoginContexts;
+import com.ms.blogserver.constant.contexts.PermissionContexts;
+import com.ms.blogserver.constant.contexts.RoleContexts;
 import com.ms.blogserver.constant.exception.CustomException;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultCode;
@@ -10,6 +12,8 @@ import com.ms.blogserver.dto.BaseDTO;
 import com.ms.blogserver.service.MenuService;
 import com.ms.blogserver.service.UserService;
 import org.apache.shiro.authz.AuthorizationException;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +36,7 @@ public class UserInfoController {
     private UserService userService;
 
     @PostMapping(value = "/menu")
+    @RequiresRoles(value = {RoleContexts.SYSTEM_ADMIN,RoleContexts.CONTENT_MANAGER},logical = Logical.OR)
     public Result getMenu(Long uid){
         if (uid == null){
             throw new CustomException(LoginContexts.NO_LOGIN_USER);
@@ -39,7 +44,7 @@ public class UserInfoController {
         return ResultFactory.buildSuccessResult(menuService.getMenusByCurrentUser(uid));
     }
     @PostMapping(value = "/user/page")
-    @RequiresRoles(value = "sysAdmin")
+    @RequiresPermissions(logical = Logical.AND, value = {PermissionContexts.USERS_MANAGEMENT})
     public Result getByPage(BaseDTO dto){
         try {
             return ResultFactory.buildSuccessResult(userService.getPage(dto));

@@ -13,4 +13,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permission> implements PermissionService {
+    @Override
+    public String getNameById(Long pid) {
+        return baseMapper.selectById(pid).getName();
+    }
 }

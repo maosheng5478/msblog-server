@@ -1,5 +1,6 @@
 package com.ms.blogserver.controller;
 
+import com.ms.blogserver.constant.exception.CustomException;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.vo.CaptchaVO;
@@ -31,24 +32,34 @@ public class VerifyController {
     @Autowired
     private CaptchaService captchaService;
 
-    @Autowired
-    private RedisUtils redisUtils;
-
     @PostMapping(value = "/sms")
     public Result sendSMSCode(String phone){
-        tokenService.sendSMS(phone);
-        return ResultFactory.buildSuccessResult("");
+        try {
+            tokenService.sendSMS(phone);
+            return ResultFactory.buildSuccessResult("");
+        }catch (Exception e){
+            throw new CustomException(e.getMessage());
+        }
+
     }
 
     @PostMapping(value = "/captcha/arithmetic")
     public Result arithmetic(){
-        CaptchaVO captchaVO = captchaService.createArithmetic();
-        return ResultFactory.buildSuccessResult(captchaVO);
+        try {
+            CaptchaVO captchaVO = captchaService.createArithmetic();
+            return ResultFactory.buildSuccessResult(captchaVO);
+        } catch (Exception e) {
+            throw new CustomException(e.getMessage());
+        }
     }
 
     @PostMapping(value = "/captcha/spec")
-    public Result spec() throws IOException, FontFormatException {
-        CaptchaVO captchaVO = captchaService.createSpec();
-        return ResultFactory.buildSuccessResult(captchaVO);
+    public Result spec(){
+        try {
+            CaptchaVO captchaVO = captchaService.createSpec();
+            return ResultFactory.buildSuccessResult(captchaVO);
+        } catch (Exception e) {
+            throw new CustomException(e.getMessage());
+        }
     }
 }

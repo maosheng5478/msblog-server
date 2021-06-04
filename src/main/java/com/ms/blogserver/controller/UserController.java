@@ -75,8 +75,13 @@ public class UserController {
 
     @PostMapping(value = "/update")
     public Result userUpdate(@RequestBody UserDTO u) throws CustomException {
-        userService.updateUser(u);
-        return ResultFactory.buildSuccessResult(userService.findAll());
+        try {
+            userService.updateUser(u);
+            return ResultFactory.buildSuccessResult(userService.findAll());
+        }catch (Exception e){
+            throw new CustomException(e.getMessage());
+        }
+
     }
     @PostMapping(value = "/remove")
     public Result userDelete(@RequestBody Long id) throws CustomException {

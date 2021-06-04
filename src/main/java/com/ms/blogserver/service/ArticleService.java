@@ -2,6 +2,7 @@ package com.ms.blogserver.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
+import com.ms.blogserver.dto.ArticleDTO;
 import com.ms.blogserver.entity.Article;
 import com.ms.blogserver.vo.ArticleVO;
 
@@ -14,7 +15,7 @@ public interface ArticleService extends IService<Article> {
 
     ArticleVO getArticleById(Long id);
 
-    PageInfo getPage();
+    PageInfo<ArticleVO> getPage(ArticleDTO dto);
 
 
 }

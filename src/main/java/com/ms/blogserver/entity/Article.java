@@ -27,6 +27,7 @@ public class Article implements Serializable {
     private Long writerId;
     private String cover;
     private Integer likes;
+    private Integer type;
     @TableField(value = "create_time",fill = FieldFill.INSERT)
     private LocalTime createTime;
     @TableField(value = "update_time",fill = FieldFill.UPDATE)

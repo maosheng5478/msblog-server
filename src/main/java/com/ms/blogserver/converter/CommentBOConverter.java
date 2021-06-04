@@ -1,6 +1,6 @@
-package com.ms.blogserver.converter.bo;
+package com.ms.blogserver.converter;
 
-import com.ms.blogserver.converter.Converter;
+import com.ms.blogserver.converter.core.Converter;
 import com.ms.blogserver.entity.Comment;
 import com.ms.blogserver.bo.CommentBO;
 import org.mapstruct.factory.Mappers;

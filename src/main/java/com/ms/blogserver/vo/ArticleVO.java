@@ -20,6 +20,8 @@ public class ArticleVO {
     private String writer;
     private String cover;
     private Integer likes;
+    private Integer type;
+    private String typeName;
 
     //文章评论
     private List<CommentVO> commentVOS;

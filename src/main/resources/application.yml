@@ -7,7 +7,7 @@ server:                  #配置server
       force: true
       charset: utf-8
       enabled: true
-  port: 8089
+  port: 8080
 spring:
   servlet:
     multipart:

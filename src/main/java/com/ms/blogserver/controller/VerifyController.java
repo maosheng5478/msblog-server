@@ -9,6 +9,7 @@ import com.ms.blogserver.service.TokenService;
 import com.ms.blogserver.utils.RedisUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,7 +44,7 @@ public class VerifyController {
 
     }
 
-    @PostMapping(value = "/captcha/arithmetic")
+    @GetMapping(value = "/captcha/arithmetic")
     public Result arithmetic(){
         try {
             CaptchaVO captchaVO = captchaService.createArithmetic();
@@ -53,7 +54,7 @@ public class VerifyController {
         }
     }
 
-    @PostMapping(value = "/captcha/spec")
+    @GetMapping(value = "/captcha/spec")
     public Result spec(){
         try {
             CaptchaVO captchaVO = captchaService.createSpec();

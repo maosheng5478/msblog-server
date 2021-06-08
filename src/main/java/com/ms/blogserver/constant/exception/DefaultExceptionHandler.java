@@ -64,6 +64,7 @@ public class DefaultExceptionHandler {
      * 捕捉404异常
      */
     @ExceptionHandler(NoHandlerFoundException.class)
+    @ResponseBody
     public Result handle(NoHandlerFoundException e) {
         e.printStackTrace();
         log.error(e.getMessage());
@@ -79,6 +80,9 @@ public class DefaultExceptionHandler {
     public Result handleException(Exception e) {
         log.error(e.getMessage());
         e.printStackTrace();
+        if (e instanceof NoHandlerFoundException){
+            return ResultFactory.buildResult(ResultCode.NOT_FOUND,ResultString.PAGE_NO_FOUND.DATA);
+        }
         return ResultFactory.buildFailResult(e.getMessage());
     }
 }

@@ -11,6 +11,9 @@ server: #配置server
 spring:
   mvc:
     throw-exception-if-no-handler-found: true
+  #main:
+   # web-application-type: none
+
   servlet:
     multipart:
       max-file-size: 10MB #文件最大上传大小
@@ -41,7 +44,7 @@ spring:
     # 连接超时时间（10秒）
     timeout: PT10S
 
-
+# 正式环境取消logging配置，默认加载resources文件下logback-spring.xml
 logging:
   config: classpath:logback/logback-spring.xml
 

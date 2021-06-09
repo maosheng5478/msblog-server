@@ -5,8 +5,10 @@ scanPeriod：设置监测配置文件是否有修改的时间间隔，如果没�
 debug：当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。
 -->
 <configuration scan="false" scanPeriod="60 seconds" debug="false">
-    <!-- 定义日志的根目录   建议写绝对路径   如果不写默认在项目运行的根路径( D盘,C盘这种)-->
+    <!-- windows环境下设置觉得路径，如果不写默认在项目运行的根路径-->
     <property name="LOG_HOME" value="D:/myself/IdeaProject/spring-log/ms-server/" />
+    <!-- 打包时使用此路径生成在tomcat目录下 -->
+    <!--<property name="LOG_HOME" value="spring-log/ms-server/" />-->
     <!-- 定义日志文件名称 -->
     <property name="appName" value="ms-log"/>
     <!-- ch.qos.logback.core.ConsoleAppender 表示控制台输出 -->

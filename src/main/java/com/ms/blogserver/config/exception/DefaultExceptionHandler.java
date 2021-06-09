@@ -38,6 +38,11 @@ public class DefaultExceptionHandler {
         return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.DATA);
     }
 
+    /**
+     * 自定义CustomException异常捕获
+     * @param e
+     * @return 返回400
+     */
     @ExceptionHandler(CustomException.class)
     @ResponseBody
     public Result handleCustomException(CustomException e){
@@ -60,16 +65,6 @@ public class DefaultExceptionHandler {
         return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, LoginContexts.INSUFFICIENT_USER_PERMISSIONS);
     }
 
-    /**
-     * 捕捉404异常
-     */
-    @ExceptionHandler(NoHandlerFoundException.class)
-    @ResponseBody
-    public Result handle(NoHandlerFoundException e) {
-        e.printStackTrace();
-        log.error(e.getMessage());
-        return ResultFactory.buildResult(ResultCode.NOT_FOUND,ResultString.PAGE_NO_FOUND.DATA);
-    }
     /**
      * 其他异常
      * @param e

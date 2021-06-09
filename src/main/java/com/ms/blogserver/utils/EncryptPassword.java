@@ -3,7 +3,7 @@ package com.ms.blogserver.utils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 
 /**
- * @description:
+ * @description: 密码加密
  * @author: zhh
  * @time: 2021/5/14
  */

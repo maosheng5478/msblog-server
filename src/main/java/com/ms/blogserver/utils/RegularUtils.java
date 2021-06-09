@@ -3,7 +3,7 @@ package com.ms.blogserver.utils;
 import java.util.regex.Pattern;
 
 /**
- * @description:
+ * @description: 规则验证工具类
  * @author: zhh
  * @time: 2021/6/1
  */

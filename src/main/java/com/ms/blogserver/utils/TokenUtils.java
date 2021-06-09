@@ -12,7 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
 /**
- * @description:
+ * @description: jwt token工具类
  * @author: zhh
  * @time: 2021/5/25
  */

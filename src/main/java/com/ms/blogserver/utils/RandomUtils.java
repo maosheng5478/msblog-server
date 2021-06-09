@@ -3,7 +3,7 @@ package com.ms.blogserver.utils;
 import java.util.Random;
 
 /**
- * @description:
+ * @description: 随机数生成工具类
  * @author: zhh
  * @time: 2021/5/21
  */

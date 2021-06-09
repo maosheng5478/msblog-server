@@ -8,7 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 
 /**
- * @description:
+ * @description: 验证码生成
  * @author: zhh
  * @time: 2021/6/1
  */

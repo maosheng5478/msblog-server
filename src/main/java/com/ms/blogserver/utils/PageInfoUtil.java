@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 import java.io.Serializable;
 
 /**
- * @description:
+ * @description: pageInfo转换
  * @author: zhh
  * @time: 2021/6/2
  */

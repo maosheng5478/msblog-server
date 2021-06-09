@@ -1,4 +1,4 @@
-package com.ms.blogserver.constant.exception;
+package com.ms.blogserver.config.exception;
 
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultCode;

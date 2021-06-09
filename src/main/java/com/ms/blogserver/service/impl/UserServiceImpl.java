@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.constant.contexts.LoginContexts;
-import com.ms.blogserver.constant.exception.CustomException;
+import com.ms.blogserver.config.exception.CustomException;
 import com.ms.blogserver.converter.dto.UserDTOConverter;
 import com.ms.blogserver.converter.vo.UserVOConverter;
 import com.ms.blogserver.dto.BaseDTO;

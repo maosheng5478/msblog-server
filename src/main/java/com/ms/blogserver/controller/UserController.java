@@ -2,7 +2,7 @@ package com.ms.blogserver.controller;
 
 import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.constant.contexts.VerifyContexts;
-import com.ms.blogserver.constant.exception.CustomException;
+import com.ms.blogserver.config.exception.CustomException;
 import com.ms.blogserver.constant.result.ResultCode;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;

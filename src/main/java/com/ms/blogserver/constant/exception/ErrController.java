@@ -5,12 +5,8 @@ import com.ms.blogserver.constant.result.ResultCode;
 import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.constant.result.ResultString;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
 import org.springframework.boot.web.servlet.error.ErrorController;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -22,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class ErrController implements ErrorController {
 
-    @Autowired
-    private BasicErrorController basicErrorController;
+//    @Autowired
+//    private BasicErrorController basicErrorController;
     /**
      * 404页面
      */

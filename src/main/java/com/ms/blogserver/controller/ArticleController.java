@@ -46,4 +46,9 @@ public class ArticleController {
             throw new CustomException(e.getMessage());
         }
     }
+
+    @PostMapping(value = "/user/comment")
+    public Result getUserComment(){
+        return null;
+    }
 }

@@ -2,21 +2,19 @@ package com.ms.blogserver.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.ToString;
 
 /**
  * @description:
  * @author: zhh
- * @time: 2021/6/1
+ * @time: 2021/6/10
  */
 @Data
-@ToString
 @AllArgsConstructor
-public class CaptchaVO {
-    private String key;
-    private String img;
+public class LogVO {
+    private String fileName;
+    private String time;
+    private String context;
 
-
-    public CaptchaVO() {
+    public LogVO() {
     }
 }

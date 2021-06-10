@@ -46,22 +46,21 @@ public class DefaultExceptionHandler {
     @ExceptionHandler(CustomException.class)
     @ResponseBody
     public Result handleCustomException(CustomException e){
-        log.error(e.getMessage());
-        e.printStackTrace();
+        log.error(e.getMessage(),e);
         return ResultFactory.buildFailResult(e.getMessage());
     }
 
     @ExceptionHandler({UnauthorizedException.class})
     @ResponseBody
     public Result handleUnauthorizedException(UnauthorizedException unauthorizedException) {
-        unauthorizedException.printStackTrace();
+        log.error(unauthorizedException.getMessage(),unauthorizedException);
         return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.DATA);
     }
     @ExceptionHandler(AuthorizationException.class)
     @ResponseBody
     public Result handleAuthorizationException(AuthorizationException e){
         //e.printStackTrace();
-        log.error("handleAuthorizationException:"+LoginContexts.INSUFFICIENT_USER_PERMISSIONS);
+        log.error("handleAuthorizationException:"+LoginContexts.INSUFFICIENT_USER_PERMISSIONS,e);
         return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, LoginContexts.INSUFFICIENT_USER_PERMISSIONS);
     }
 
@@ -73,8 +72,7 @@ public class DefaultExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public Result handleException(Exception e) {
-        log.error(e.getMessage());
-        e.printStackTrace();
+        log.error(e.getMessage(),e);
         if (e instanceof NoHandlerFoundException){
             return ResultFactory.buildResult(ResultCode.NOT_FOUND,ResultString.PAGE_NO_FOUND.DATA);
         }

@@ -46,7 +46,7 @@ spring:
 
 # 正式环境取消logging配置，默认加载resources文件下logback-spring.xml
 logging:
-  config: classpath:logback/logback-spring.xml
+  config: classpath:logback-spring.xml
 
 mybatis-plus:
   configuration:

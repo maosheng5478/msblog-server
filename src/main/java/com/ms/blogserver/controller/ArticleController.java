@@ -1,6 +1,6 @@
 package com.ms.blogserver.controller;
 
-import com.ms.blogserver.constant.exception.CustomException;
+import com.ms.blogserver.config.exception.CustomException;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.dto.GetCommentDTO;
@@ -45,5 +45,10 @@ public class ArticleController {
         }catch (Exception e){
             throw new CustomException(e.getMessage());
         }
+    }
+
+    @PostMapping(value = "/user/comment")
+    public Result getUserComment(){
+        return null;
     }
 }

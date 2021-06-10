@@ -1,4 +1,4 @@
-package com.ms.blogserver.constant.exception;
+package com.ms.blogserver.config.exception;
 
 import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.constant.result.Result;
@@ -38,38 +38,32 @@ public class DefaultExceptionHandler {
         return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.DATA);
     }
 
+    /**
+     * 自定义CustomException异常捕获
+     * @param e
+     * @return 返回400
+     */
     @ExceptionHandler(CustomException.class)
     @ResponseBody
     public Result handleCustomException(CustomException e){
-        log.error(e.getMessage());
-        e.printStackTrace();
+        log.error(e.getMessage(),e);
         return ResultFactory.buildFailResult(e.getMessage());
     }
 
     @ExceptionHandler({UnauthorizedException.class})
     @ResponseBody
     public Result handleUnauthorizedException(UnauthorizedException unauthorizedException) {
-        unauthorizedException.printStackTrace();
+        log.error(unauthorizedException.getMessage(),unauthorizedException);
         return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.DATA);
     }
     @ExceptionHandler(AuthorizationException.class)
     @ResponseBody
     public Result handleAuthorizationException(AuthorizationException e){
         //e.printStackTrace();
-        log.error("handleAuthorizationException:"+LoginContexts.INSUFFICIENT_USER_PERMISSIONS);
+        log.error("handleAuthorizationException:"+LoginContexts.INSUFFICIENT_USER_PERMISSIONS,e);
         return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, LoginContexts.INSUFFICIENT_USER_PERMISSIONS);
     }
 
-    /**
-     * 捕捉404异常
-     */
-    @ExceptionHandler(NoHandlerFoundException.class)
-    @ResponseBody
-    public Result handle(NoHandlerFoundException e) {
-        e.printStackTrace();
-        log.error(e.getMessage());
-        return ResultFactory.buildResult(ResultCode.NOT_FOUND,ResultString.PAGE_NO_FOUND.DATA);
-    }
     /**
      * 其他异常
      * @param e
@@ -78,8 +72,7 @@ public class DefaultExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public Result handleException(Exception e) {
-        log.error(e.getMessage());
-        e.printStackTrace();
+        log.error(e.getMessage(),e);
         if (e instanceof NoHandlerFoundException){
             return ResultFactory.buildResult(ResultCode.NOT_FOUND,ResultString.PAGE_NO_FOUND.DATA);
         }

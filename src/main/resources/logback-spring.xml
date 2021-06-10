@@ -9,6 +9,7 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
     <property name="LOG_HOME" value="D:/myself/IdeaProject/spring-log/ms-server/" />
     <!-- 打包时使用此路径生成在tomcat目录下 -->
     <!--<property name="LOG_HOME" value="spring-log/ms-server/" />-->
+
     <!-- 定义日志文件名称 -->
     <property name="appName" value="ms-log"/>
     <!-- ch.qos.logback.core.ConsoleAppender 表示控制台输出 -->

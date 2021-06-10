@@ -1,4 +1,4 @@
-package com.ms.blogserver.constant.exception;
+package com.ms.blogserver.config.exception;
 
 /**
  * @description: 自定义认证异常

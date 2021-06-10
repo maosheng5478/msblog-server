@@ -33,4 +33,6 @@ public interface LoginContexts {
 
     String INSUFFICIENT_USER_PERMISSIONS = "用户权限不足";
 
+    String EMAIL_ERROR = "邮箱格式错误";
+
 }

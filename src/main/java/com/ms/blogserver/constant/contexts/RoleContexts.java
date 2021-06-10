@@ -5,20 +5,22 @@ package com.ms.blogserver.constant.contexts;
  * @author: zhh
  * @time: 2021/6/4
  */
-public interface RoleContexts {
 
+public interface RoleContexts {
     /**
      * 系统管理员
      */
     String SYSTEM_ADMIN = "sysAdmin";
-
+    Long SYSTEM_ADMIN_ID = 1L;
     /**
      * 内容管理员
      */
     String CONTENT_MANAGER = "contentManager";
-
+    Long CONTENT_MANAGER_ID = 2L;
     /**
      * 访客
      */
     String VISITOR = "visitor";
+    Long VISITOR_ID = 3L;
 }
+

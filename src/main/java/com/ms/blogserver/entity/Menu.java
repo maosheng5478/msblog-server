@@ -1,6 +1,7 @@
 package com.ms.blogserver.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.ToString;
@@ -25,6 +26,8 @@ public class Menu implements Serializable {
     private String nameZh;
     private String component;
     private Integer parentId;
+    @TableLogic
+    private int deleted;
     @TableField(exist = false)
     private List<Menu> children;
 

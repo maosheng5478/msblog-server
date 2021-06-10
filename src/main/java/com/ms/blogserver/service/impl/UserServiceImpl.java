@@ -64,18 +64,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             throw new CustomException("UserService-updateUser:"+LoginContexts.AUTHENTIC_FAIL);
         }
         User user = getUserByID(userDTO.getId());
-        if (!userDTO.getUsername().isEmpty()) {
-            user.setUsername(userDTO.getUsername());
-        }
-        if (!userDTO.getEmail().isEmpty()) {
-            user.setEmail(userDTO.getEmail());
-        }
-        if (!userDTO.getPwd().isEmpty()) {
-            user.setPwd(EncryptPassword.encrypt(userDTO.getPwd()));
-        }
-        if (!userDTO.getPhone().isEmpty()) {
-            user.setPhone(userDTO.getPhone());
-        }
+        UserDTOConverter.INSTANCE.fromDataNoNull(userDTO,user);
         baseMapper.updateById(user);
     }
 

@@ -3,6 +3,9 @@ package com.ms.blogserver.converter.dto;
 import com.ms.blogserver.converter.Converter;
 import com.ms.blogserver.entity.User;
 import com.ms.blogserver.dto.UserDTO;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 
 /**
@@ -10,7 +13,7 @@ import org.mapstruct.factory.Mappers;
  * @author: zhh
  * @time: 2021/5/31
  */
-@org.mapstruct.Mapper
+@org.mapstruct.Mapper()
 public interface UserDTOConverter extends Converter<User, UserDTO> {
 
     UserDTOConverter INSTANCE = Mappers.getMapper(UserDTOConverter.class);
@@ -20,4 +23,5 @@ public interface UserDTOConverter extends Converter<User, UserDTO> {
 
     @Override
     User fromData(UserDTO userDTO);
+
 }

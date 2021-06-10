@@ -38,6 +38,7 @@ public class UserInfoController {
     @RequiresRoles(value = {RoleContexts.SYSTEM_ADMIN,RoleContexts.CONTENT_MANAGER},logical = Logical.OR)
     public Result getMenu(Long uid){
         if (uid == null){
+
             throw new CustomException(LoginContexts.NO_LOGIN_USER);
         }
         return ResultFactory.buildSuccessResult(menuService.getMenusByCurrentUser(uid));

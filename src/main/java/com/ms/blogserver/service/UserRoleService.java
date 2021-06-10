@@ -12,4 +12,6 @@ import com.ms.blogserver.entity.UserRole;
 public interface UserRoleService extends IService<UserRole> {
 
     Long getRidByUid(Long uid) throws CustomException;
+
+    
 }

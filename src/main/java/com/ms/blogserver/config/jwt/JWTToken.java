@@ -3,7 +3,7 @@ package com.ms.blogserver.config.jwt;
 import org.apache.shiro.authc.AuthenticationToken;
 
 /**
- * @description:
+ * @description: jwt token实体类
  * @author: zhh
  * @time: 2021/5/24
  */

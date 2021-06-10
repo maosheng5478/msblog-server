@@ -1,7 +1,7 @@
 package com.ms.blogserver.constant.contexts;
 
 /**
- * @description:
+ * @description: redis值关键字
  * @author: zhh
  * @time: 2021/6/1
  */

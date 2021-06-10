@@ -1,7 +1,7 @@
 package com.ms.blogserver.constant.contexts;
 
 /**
- * @description:
+ * @description: 数值常量
  * @author: zhh
  * @time: 2021/6/1
  */

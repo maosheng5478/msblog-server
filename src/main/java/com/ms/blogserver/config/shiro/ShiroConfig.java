@@ -18,7 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * @description:
+ * @description: shiro配置
  * @author: zhh
  * @time: 2021/5/24
  */

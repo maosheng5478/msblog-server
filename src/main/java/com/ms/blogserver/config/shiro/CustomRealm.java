@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 
 /**
- * @description:
+ * @description: shiro认证
  * @author: zhh
  * @time: 2021/5/24
  */

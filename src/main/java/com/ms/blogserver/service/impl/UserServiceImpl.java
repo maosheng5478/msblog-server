@@ -45,7 +45,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public void insertUser(UserDTO userDTO) {
         userDTO.setPwd(EncryptPassword.encrypt(userDTO.getPwd()));
-        User  user = UserDTOConverter.INSTANCE.fromData(userDTO);
+        User user = UserDTOConverter.INSTANCE.fromData(userDTO);
         String email = user.getEmail();
         if (StringUtils.isNotEmpty(email)){
             if (!RegularUtils.isEmail(email)){

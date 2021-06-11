@@ -3,6 +3,7 @@ package com.ms.blogserver.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageInfo;
+import com.ms.blogserver.constant.contexts.DigitalContexts;
 import com.ms.blogserver.converter.bo.CommentBOConverter;
 import com.ms.blogserver.converter.vo.CommentVOConverter;
 import com.ms.blogserver.entity.Comment;
@@ -59,7 +60,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         commentBOList.forEach(commentBO -> {
             commentBO.setCommenter(userService.getUserByID(commentBO.getCommenterId()).getUsername());
             Long resID = commentBO.getRespondentId();
-            if (resID != 0){
+            if (!resID.equals(DigitalContexts.ZERO_LONG)){
                 commentBO.setRespondent(userService.getUserByID(resID).getUsername());
             }
         });
@@ -71,6 +72,6 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
             List<CommentVO> children =getParentId(commentVO.getId());
             commentVO.setChildren(children);
         });
-        list.removeIf(commentVO -> commentVO.getParentId() != 0);
+        list.removeIf(commentVO -> !commentVO.getParentId().equals(DigitalContexts.ZERO_LONG));
     }
 }

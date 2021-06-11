@@ -10,6 +10,7 @@ import com.ms.blogserver.service.FileService;
 import com.ms.blogserver.utils.FileUtils;
 import com.ms.blogserver.vo.FileSimpleVO;
 import com.ms.blogserver.vo.LogVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -21,6 +22,7 @@ import java.util.List;
  * @time: 2021/6/10
  */
 @Service
+@Slf4j
 public class FileServiceImpl implements FileService {
     @Override
     public PageInfo<FileSimpleVO> findFileName(BaseDTO dto) {
@@ -29,7 +31,7 @@ public class FileServiceImpl implements FileService {
             List<FileSimpleVO> files = FileUtils.files(new File(URLContexts.LOG_ABSOLUTE_URL));
             return new PageInfo<>(files);
         } catch (Exception e) {
-            throw new CustomException(ErrorContexts.FILE_ERR);
+            throw new CustomException(e.getMessage()+ErrorContexts.FILE_ERR);
         }
     }
 
@@ -48,9 +50,16 @@ public class FileServiceImpl implements FileService {
         String url = URLContexts.LOG_ABSOLUTE_URL +URLContexts.SLASH +fileName;
         File file = new File(url);
         if (file.exists()) {
-            file.delete();
+            try {
+                boolean delete = file.delete();
+                if (!delete){
+                    throw new CustomException(ErrorContexts.FILE_NO_DELETE);
+                };
+            } catch (Exception e) {
+                log.error(e.getMessage(),e);
+            }
         }else {
-            throw new CustomException();
+            throw new CustomException(ErrorContexts.NO_FILE);
         }
     }
 }

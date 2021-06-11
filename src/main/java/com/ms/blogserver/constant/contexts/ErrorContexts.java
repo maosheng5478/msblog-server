@@ -12,4 +12,6 @@ public interface ErrorContexts {
     String FILE_ERR = "文件读取异常";
 
     String NO_FILE = "文件不存在";
+
+    String FILE_NO_DELETE = "文件无法删除，需要管理员权限或尝试关闭文件";
 }

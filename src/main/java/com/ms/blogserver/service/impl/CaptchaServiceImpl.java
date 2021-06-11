@@ -49,7 +49,6 @@ public class CaptchaServiceImpl implements CaptchaService {
             redisUtils.set(key,code,DigitalContexts.FIVE_MINUTES);
             return new CaptchaVO(key,captcha.toBase64());
         }catch (Exception e){
-            e.printStackTrace();
             throw new CustomException("Unknown error from captcha-createSpec:"+e.getMessage());
         }
 

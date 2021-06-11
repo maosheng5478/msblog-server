@@ -32,9 +32,7 @@ public class DefaultExceptionHandler {
     @ExceptionHandler({ShiroException.class})
     @ResponseBody
     public Result handleShiroException(ShiroException e,UnauthorizedException unauthorizedException) {
-        e.printStackTrace();
-        unauthorizedException.printStackTrace();
-        log.error("handleShiroException:shiro authorized error");
+        log.error("handleShiroException:shiro authorized error",e);
         return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.DATA);
     }
 

@@ -1,5 +1,5 @@
 /*
- Navicat Premium Data Transfer
+ Navicat MySQL Data Transfer
 
  Source Server         : conn
  Source Server Type    : MySQL
@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 02/06/2021 18:06:51
+ Date: 11/06/2021 09:53:32
 */
 
 SET NAMES utf8mb4;
@@ -26,6 +26,7 @@ CREATE TABLE `ms_article`  (
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
   `content_md` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
+  `type` int NULL DEFAULT NULL,
   `writer_id` bigint NOT NULL,
   `create_time` datetime NULL DEFAULT NULL,
   `update_time` datetime NULL DEFAULT NULL,
@@ -33,12 +34,31 @@ CREATE TABLE `ms_article`  (
   `likes` int NULL DEFAULT NULL COMMENT '点赞',
   `version` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ms_article
 -- ----------------------------
-INSERT INTO `ms_article` VALUES (1, '11', '11', '11', 1393130419668688898, NULL, NULL, '11', 0, 0);
+INSERT INTO `ms_article` VALUES (1, '11', '11', '11', 2, 1393130419668688898, NULL, NULL, '11', 0, 0);
+
+-- ----------------------------
+-- Table structure for ms_category
+-- ----------------------------
+DROP TABLE IF EXISTS `ms_category`;
+CREATE TABLE `ms_category`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `category_id` int NULL DEFAULT NULL,
+  `category` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of ms_category
+-- ----------------------------
+INSERT INTO `ms_category` VALUES (1, 1, 'vue');
+INSERT INTO `ms_category` VALUES (2, 2, 'spring');
+INSERT INTO `ms_category` VALUES (3, 3, 'mysql');
+INSERT INTO `ms_category` VALUES (4, 4, NULL);
 
 -- ----------------------------
 -- Table structure for ms_comment
@@ -54,7 +74,7 @@ CREATE TABLE `ms_comment`  (
   `likes` int NULL DEFAULT 0,
   `create_time` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ms_comment
@@ -75,22 +95,25 @@ CREATE TABLE `ms_menu`  (
   `name_zh` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `component` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `parent_id` int NULL DEFAULT NULL,
+  `deleted` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ms_menu
 -- ----------------------------
-INSERT INTO `ms_menu` VALUES (1, '/admin', 'AdminIndex', '首页', 'AdminIndex', 0);
-INSERT INTO `ms_menu` VALUES (2, '/admin', 'Context', '内容管理', 'AdminIndex', 0);
-INSERT INTO `ms_menu` VALUES (3, '/admin', 'User', '用户管理', 'AdminIndex', 0);
-INSERT INTO `ms_menu` VALUES (4, '/admin', 'Info', '个人信息', 'AdminIndex', 0);
-INSERT INTO `ms_menu` VALUES (5, '/admin', 'Security', '安全设置', 'AdminIndex', 0);
-INSERT INTO `ms_menu` VALUES (6, '/admin/user/profile', 'Profile', '用户信息', 'user/UserProfile', 3);
-INSERT INTO `ms_menu` VALUES (7, '/admin/user/role', 'RoleSetting', '角色配置', 'user/Role', 3);
-INSERT INTO `ms_menu` VALUES (9, '/admin/content/banner', 'BannerManagement', '广告管理', 'content/BannerManagement', 2);
-INSERT INTO `ms_menu` VALUES (10, '/admin/content/article', 'ArticleManagement', '文章管理', 'content/ArticleManagement', 2);
-INSERT INTO `ms_menu` VALUES (11, '/admin', 'leaveComments', '留言管理', 'AdminIndex', 0);
+INSERT INTO `ms_menu` VALUES (1, '/admin', 'AdminIndex', '首页', 'AdminIndex', 0, 0);
+INSERT INTO `ms_menu` VALUES (2, '/admin', 'Context', '内容管理', 'AdminIndex', 0, 0);
+INSERT INTO `ms_menu` VALUES (3, '/admin', 'User', '用户管理', 'AdminIndex', 0, 0);
+INSERT INTO `ms_menu` VALUES (4, '/admin', 'Info', '个人信息', 'AdminIndex', 0, 0);
+INSERT INTO `ms_menu` VALUES (5, '/admin', 'Security', '安全设置', 'AdminIndex', 0, 0);
+INSERT INTO `ms_menu` VALUES (6, '/admin/user/profile', 'Profile', '用户信息', 'user/UserProfile', 3, 0);
+INSERT INTO `ms_menu` VALUES (7, '/admin/user/role', 'RoleSetting', '角色配置', 'user/Role', 3, 0);
+INSERT INTO `ms_menu` VALUES (9, '/admin/content/banner', 'BannerManagement', '广告管理', 'content/BannerManagement', 2, 0);
+INSERT INTO `ms_menu` VALUES (10, '/admin/content/article', 'ArticleManagement', '文章管理', 'content/ArticleManagement', 2, 0);
+INSERT INTO `ms_menu` VALUES (11, '/admin', 'leaveComments', '留言管理', 'AdminIndex', 0, 1);
+INSERT INTO `ms_menu` VALUES (12, '/admin/content/log', 'Logout', '日志输出', 'log', 2, 0);
+INSERT INTO `ms_menu` VALUES (13, '/admin', 'System', '系统管理', 'Adminlindex', 0, 0);
 
 -- ----------------------------
 -- Table structure for ms_permission
@@ -98,11 +121,11 @@ INSERT INTO `ms_menu` VALUES (11, '/admin', 'leaveComments', '留言管理', 'Ad
 DROP TABLE IF EXISTS `ms_permission`;
 CREATE TABLE `ms_permission`  (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `desc` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `name_en` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `described` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `url` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ms_permission
@@ -122,7 +145,7 @@ CREATE TABLE `ms_permission_menu`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `pid`(`pid`) USING BTREE,
   INDEX `mid`(`mid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 207 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ms_permission_menu
@@ -134,9 +157,9 @@ INSERT INTO `ms_permission_menu` VALUES (197, 1, 10);
 INSERT INTO `ms_permission_menu` VALUES (198, 1, 9);
 INSERT INTO `ms_permission_menu` VALUES (199, 1, 6);
 INSERT INTO `ms_permission_menu` VALUES (200, 1, 7);
-INSERT INTO `ms_permission_menu` VALUES (204, 2, 4);
-INSERT INTO `ms_permission_menu` VALUES (205, 2, 5);
-INSERT INTO `ms_permission_menu` VALUES (206, 2, 11);
+INSERT INTO `ms_permission_menu` VALUES (204, 3, 4);
+INSERT INTO `ms_permission_menu` VALUES (205, 3, 5);
+INSERT INTO `ms_permission_menu` VALUES (206, 3, 11);
 
 -- ----------------------------
 -- Table structure for ms_role
@@ -148,7 +171,7 @@ CREATE TABLE `ms_role`  (
   `name_zh` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `enabled` tinyint(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ms_role
@@ -168,7 +191,7 @@ CREATE TABLE `ms_role_permission`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `rid`(`rid`) USING BTREE,
   INDEX `pid`(`pid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ms_role_permission
@@ -199,7 +222,6 @@ CREATE TABLE `ms_user`  (
 -- Records of ms_user
 -- ----------------------------
 INSERT INTO `ms_user` VALUES (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'string', 'string', '2021-05-20 17:47:14', '2021-05-20 17:47:14', 14, 0);
-INSERT INTO `ms_user` VALUES (2, 'admin', 'admin13213', NULL, NULL, NULL, NULL, 1, 0);
 INSERT INTO `ms_user` VALUES (4, '4', '4', NULL, NULL, NULL, NULL, 1, 0);
 INSERT INTO `ms_user` VALUES (5, '5', '5', NULL, NULL, NULL, NULL, 1, 0);
 INSERT INTO `ms_user` VALUES (6, '6', '6', NULL, NULL, NULL, NULL, 1, 0);
@@ -223,7 +245,7 @@ CREATE TABLE `ms_user_role`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `uid`(`uid`) USING BTREE,
   INDEX `rid`(`rid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ms_user_role
